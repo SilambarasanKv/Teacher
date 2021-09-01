@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".WaitingFragment">
+
+    <TextView
+        android:id="@+id/tvWaitingForApproval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Waiting for school approval"
+        android:layout_marginTop="120dp"
+        android:textColor="@color/red"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tvReqSubmitted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/req_submitted"
+        android:layout_below="@id/tvWaitingForApproval"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvYouWillGetEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/you_will_get_email"
+        android:layout_below="@id/tvReqSubmitted"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:lineHeight="27dp"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/btnApproved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Approved"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="#2196F3"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="40dp"/>
+
+    <Button
+        android:id="@+id/btnRejected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rejected"
+        android:layout_marginRight="40dp"
+        android:backgroundTint="#2196F3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp" />
+</RelativeLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="25dp"
+            android:paddingTop="25dp"
+            >
+
+            <TextView
+                android:id="@+id/tvInviteTeachers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Invite Teachers"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tvShareCodeBig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/share_code"
+                android:layout_below="@+id/tvInviteTeachers"
+                android:layout_marginTop="13dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XCB001"
+                android:layout_below="@+id/tvShareCodeBig"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:background="#EDEDED"
+                android:layout_marginTop="25dp"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"/>
+
+            <TextView
+                android:id="@+id/tvShareCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share teacher code"
+                android:layout_toRightOf="@+id/tvCode"
+                android:layout_below="@id/tvShareCodeBig"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="13dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/ivCopy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_content_copy_24"
+                android:layout_below="@id/tvShareCodeBig"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@id/tvShareCode"
+                android:layout_marginStart="13dp"
+                app:tint="#008EFF"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/ivShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_share_24"
+                android:layout_below="@id/tvShareCodeBig"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@id/ivCopy"
+                android:layout_marginStart="13dp"
+                app:tint="#008EFF"
+                android:backgroundTint="#008EFF"
+                android:clickable="true" />
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

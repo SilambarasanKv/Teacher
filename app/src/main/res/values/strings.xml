@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">TeacherAhaguru</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="enter_code">Please enter the teacher code shared by your school</string>
+
+    <string name="req_submitted">Your request has been submitted to the school</string>
+    <string name="you_will_get_email">You will get an email notification once your school approves your request</string>
+
+    <string name="req_denied">Your request has been denied by the school</string>
+    <string name="try_again">Try again with the correct details</string>
+
+    <string name="hint_word">Word...</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
+
+    <string name="first">Teachers</string>
+    <string name="second">Requests</string>
+    <string name="third">Invite</string>
+
+    <string name="share_code">Share this code with your teacher to join the app</string>
+</resources>
