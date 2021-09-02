@@ -19,7 +19,7 @@ public abstract class TeacherRoomDatabase extends RoomDatabase {
 
     public abstract TeacherDao teacherDao();
 
-    private static volatile TeacherRoomDatabase INSTANCE;
+   /* private static volatile TeacherRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -49,12 +49,12 @@ public abstract class TeacherRoomDatabase extends RoomDatabase {
                 TeacherDao dao = INSTANCE.teacherDao();
                 dao.deleteAll();
 
-                /*Teachers teachers = new Teachers("Hello");
+                Teachers teachers = new Teachers();
                 dao.insert(teachers);
-                teachers = new Teachers("World");
-                dao.insert(teachers);*/
+                teachers = new Teachers();
+                dao.insert(teachers);
             });
         }
-    };
+    };*/
 }
 

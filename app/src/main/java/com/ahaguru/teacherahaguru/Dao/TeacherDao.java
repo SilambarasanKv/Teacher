@@ -15,12 +15,13 @@ public interface TeacherDao {
 
     // allowing the insert of the same word multiple times by passing a
     // conflict resolution strategy
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Teachers teachers);
 
-    @Query("DELETE FROM teacher_table")
-    void deleteAll();
+    @Insert
+    public void addTeachers(Teachers teachers);
+
+    /*@Query("DELETE FROM teacher_table")
+    void deleteAll();*/
 
     @Query("SELECT * FROM teacher_table")
-    LiveData<List<Teachers>> getAlphabetizedTeachers();
+    public List<Teachers> getTeachers();
 }

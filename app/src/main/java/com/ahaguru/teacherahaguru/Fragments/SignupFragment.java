@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
 
@@ -77,10 +78,10 @@ public class SignupFragment extends Fragment {
 
         buttonNext = v.findViewById(R.id.btnNext);
 
-        fullName = v.findViewById(R.id.tvFullname);
+        /*fullName = v.findViewById(R.id.tvFullname);
         phoneNumber = v.findViewById(R.id.tvPhoneNumber);
         emailAddress = v.findViewById(R.id.tvEmailAddress);
-        subjects = v.findViewById(R.id.tvSubjects);
+        subjects = v.findViewById(R.id.tvSubjects);*/
 
         name = v.findViewById(R.id.etFullName);
         phone = v.findViewById(R.id.etPhoneNumber);
@@ -107,11 +108,14 @@ public class SignupFragment extends Fragment {
 
                 if (isAllFieldsChecked) {
 
-//                    CodeFragment codeFragment = new CodeFragment();
-//                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-//                    transaction.replace(R.id.mainLayout, codeFragment);
-//                    transaction.commit();
+                    String teacherName = name.getText().toString();
+                    String teacherMail = email.getText().toString();
 
+                    Teachers teachers = new Teachers();
+                    teachers.setName(teacherName);
+                    teachers.setEmail(teacherMail);
+
+                    MainActivity.teacherRoomDatabase.teacherDao().addTeachers(teachers);
 
                     ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(2);
 

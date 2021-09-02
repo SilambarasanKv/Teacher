@@ -10,11 +10,31 @@ public class Teachers {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "teachers")
-    private String mTeachers;
+    @ColumnInfo(name = "teacher_name")
+    private String name;
 
-    public Teachers(@NonNull String teachers) {this.mTeachers = teachers;}
+    @ColumnInfo(name = "teacher_email")
+    private String email;
 
-    public String getTeachers(){return this.mTeachers;}
+    @NonNull
+    public String getName() {
+        return name;
+    }
+
+    public void setName(@NonNull String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /*public Teachers(@NonNull String teachers) {this.mTeachers = teachers;}
+
+    public String getTeachers(){return this.mTeachers;}*/
 }
 

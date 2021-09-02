@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import com.ahaguru.teacherahaguru.Fragments.ApprovedFragment;
 import com.ahaguru.teacherahaguru.Fragments.CodeFragment;
@@ -13,11 +14,14 @@ import com.ahaguru.teacherahaguru.Fragments.RejectedFragment;
 import com.ahaguru.teacherahaguru.Fragments.SignupFragment;
 import com.ahaguru.teacherahaguru.Fragments.TabbedFragment;
 import com.ahaguru.teacherahaguru.Fragments.WaitingFragment;
+import com.ahaguru.teacherahaguru.Room.TeacherRoomDatabase;
 import com.ahaguru.teacherahaguru.utils.FragmentStateSaver;
 
 public class MainActivity extends AppCompatActivity {
     public FragmentStateSaver fragmentStateSaver;
     Toolbar toolbar;
+
+    public static TeacherRoomDatabase teacherRoomDatabase;
 
    // SignupFragment signupFragment;
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Teacher");
+
+        teacherRoomDatabase = Room.databaseBuilder(getApplicationContext(), TeacherRoomDatabase.class, "teacher_table").allowMainThreadQueries().build();
 
         fragmentStateSaver = new FragmentStateSaver(findViewById(R.id.mainLayout), getSupportFragmentManager()) {
             @Override
