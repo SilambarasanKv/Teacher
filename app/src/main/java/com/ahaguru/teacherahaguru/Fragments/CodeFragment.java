@@ -9,19 +9,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.AsteriskPassword.AsteriskPasswordTransformationMethod;
 import com.ahaguru.teacherahaguru.R;
+import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
+import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 public class CodeFragment extends Fragment {
 
+ //   TeacherViewModel teacherViewModel;
     Button buttonSubmit;
 
     EditText code;
+    Spinner spin;
 
     boolean isAllFieldsChecked = false;
 
@@ -35,6 +42,8 @@ public class CodeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_code, container, false);
 
+        spin = (Spinner) v.findViewById(R.id.spinner);
+
         buttonSubmit = v.findViewById(R.id.btnSubmit);
         code = v.findViewById(R.id.etCode);
 
@@ -45,6 +54,8 @@ public class CodeFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
 
+//        teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
+
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +63,7 @@ public class CodeFragment extends Fragment {
                 isAllFieldsChecked = CheckAllFields();
 
                 if(isAllFieldsChecked) {
+
 
                     ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(3);
                 }
@@ -66,9 +78,6 @@ public class CodeFragment extends Fragment {
                 Log.i("tag", "keyCode: " + keyCode);
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     Log.i("", "onKey Back listener is working!!!");
-
-                    SignupFragment signupFragment = new SignupFragment();
-
 
 
                     ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(1);

@@ -17,25 +17,36 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
+import com.ahaguru.teacherahaguru.Repository.TeachersRepository;
+import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
+import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class SignupFragment extends Fragment {
 
-    Button buttonNext;
+    public static final String EXTRA_NAME =
+            "com.ahaguru.teacherahaguru.Fragments.EXTRA_NAME";
+    public static final String EXTRA_EMAIL =
+            "com.ahaguru.teacherahaguru.Fragments.EXTRA_EMAIL";
 
+    Button buttonNext;
+    TeacherViewModel teacherViewModel;
     TextView fullName, phoneNumber, emailAddress, subjects;
 
     EditText name, phone, email;
 
     boolean isAllFieldsChecked = false;
 
-    String[] subLists = { "English","Chemistry","Mathematics","Biology"};
+    String[] subLists = {"English", "Chemistry", "Mathematics", "Biology"};
+
+    Spinner spin;
 
     private String bundleFullname;
     private final String bundleFullnameVAL = "bundleFullnameVAL";
@@ -74,12 +85,12 @@ public class SignupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_signup, container, false);
+        View v = inflater.inflate(R.layout.fragment_signup, container, false);
 
         buttonNext = v.findViewById(R.id.btnNext);
 
         /*fullName = v.findViewById(R.id.tvFullname);
-        phoneNumber = v.findViewById(R.id.tvPhoneNumber);
+//        phoneNumber = v.findViewById(R.id.tvPhoneNumber);
         emailAddress = v.findViewById(R.id.tvEmailAddress);
         subjects = v.findViewById(R.id.tvSubjects);*/
 
@@ -87,7 +98,7 @@ public class SignupFragment extends Fragment {
         phone = v.findViewById(R.id.etPhoneNumber);
         email = v.findViewById(R.id.etEmailAddress);
 
-        Spinner spin = (Spinner) v.findViewById(R.id.spinner);
+        spin = (Spinner) v.findViewById(R.id.spinner);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, subLists);
 
@@ -96,8 +107,10 @@ public class SignupFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
+        teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,18 +122,16 @@ public class SignupFragment extends Fragment {
                 if (isAllFieldsChecked) {
 
                     String teacherName = name.getText().toString();
+                    String teacherPhone = phone.getText().toString();
                     String teacherMail = email.getText().toString();
+                    String teacherSubject = spin.getSelectedItem().toString();
 
-                    Teachers teachers = new Teachers();
-                    teachers.setName(teacherName);
-                    teachers.setEmail(teacherMail);
-
-                    MainActivity.teacherRoomDatabase.teacherDao().addTeachers(teachers);
+                    Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail,teacherSubject, ConstantData.PENDING);
+                    teacherViewModel.insert(teachers);
 
                     ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(2);
 
                 }
-
 
 
             }
@@ -133,7 +144,7 @@ public class SignupFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.i("tag", "keyCode: " + keyCode);
-                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     Log.i("", "onKey Back listener is working!!!");
 
                     WaitingFragment waitingFragment = new WaitingFragment();
@@ -153,27 +164,26 @@ public class SignupFragment extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(0);
             return true;
-        };
+        }
+        ;
         return super.onOptionsItemSelected(item);
     }
 
     private boolean CheckAllFields() {
 
-        if(name.length() == 0) {
+        if (name.length() == 0) {
             name.setError("Your name is required");
             return false;
         }
 
-        if(phone.length() < 10) {
+        if (phone.length() < 10) {
             phone.setError("Enter the correct mobile number");
             return false;
-        }
-
-        else if(email.length() == 0) {
+        } else if (email.length() == 0) {
             email.setError("Your email address is required");
             return false;
         }

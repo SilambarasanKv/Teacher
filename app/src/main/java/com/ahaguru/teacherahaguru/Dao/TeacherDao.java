@@ -2,9 +2,11 @@ package com.ahaguru.teacherahaguru.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 
@@ -17,11 +19,20 @@ public interface TeacherDao {
     // conflict resolution strategy
 
     @Insert
-    public void addTeachers(Teachers teachers);
+    void insert(Teachers teachers);
 
-    /*@Query("DELETE FROM teacher_table")
-    void deleteAll();*/
+    @Update
+    void update(Teachers teachers);
 
-    @Query("SELECT * FROM teacher_table")
-    public List<Teachers> getTeachers();
+    @Delete
+    void delete(Teachers teachers);
+
+//    @Query("DELETE FROM teacher_table")
+//    void deleteAllteachers();
+
+    @Query("SELECT * FROM teacher_table where status=0")
+    LiveData<List<Teachers>> getAllPendingTeachers();
+
+    @Query("SELECT * FROM teacher_table where status=1")
+    LiveData<List<Teachers>> getAllApprovedTeachers();
 }

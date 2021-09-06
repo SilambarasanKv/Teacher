@@ -1,4 +1,4 @@
-/*
+
 package com.ahaguru.teacherahaguru.ViewModel;
 
 import android.app.Application;
@@ -6,29 +6,46 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
+import com.ahaguru.teacherahaguru.Repository.TeachersRepository;
 
 import java.util.List;
 
 public class TeacherViewModel extends AndroidViewModel {
 
 
+    private TeachersRepository repository;
 
-*/
-/*
-    private TeachersRepository mRepository;
+    private LiveData<List<Teachers>> allTeachers;
+    private LiveData<List<Teachers>> allTeachers2;
 
-    private final LiveData<List<Teachers>> mAllTeachers;
-
-    public TeacherViewModel (Application application) {
+    public TeacherViewModel(@NonNull Application application) {
         super(application);
-        mRepository = new TeachersRepository(application);
-        mAllTeachers = mRepository.getAllTeachers();
+        repository = new TeachersRepository(application);
+        allTeachers = repository.getAllPendingTeachers();
+        allTeachers2 = repository.getAllApprovedTeachers();
     }
 
-    public LiveData<List<Teachers>> getAllTeachers() { return mAllTeachers; }
+    public void insert(Teachers teachers) {
+        repository.insert(teachers);
+    }
 
-    public void insert(Teachers teachers) { mRepository.insert(teachers); }*//*
+    public void update(Teachers teachers) {
+        repository.update(teachers);
+    }
 
-}*/
+    public void delete(Teachers teachers) {
+        repository.delete(teachers);
+    }
+
+    public LiveData<List<Teachers>> getAllPendingTeachers() {
+        return allTeachers;
+    }
+
+
+    public LiveData<List<Teachers>> getAllApprovedTeachers() {
+        return allTeachers2;
+    }
+}

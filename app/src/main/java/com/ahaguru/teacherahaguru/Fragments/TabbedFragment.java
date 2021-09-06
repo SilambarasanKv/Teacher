@@ -2,6 +2,7 @@ package com.ahaguru.teacherahaguru.Fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -38,6 +39,11 @@ public class TabbedFragment extends Fragment {
         TabItem tabInvite = v.findViewById(R.id.tabInvite);
         ViewPager viewPager = v.findViewById(R.id.viewPager);
 
+        setHasOptionsMenu(true);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
         PagerAdapter pagerAdapter = new
                 PagerAdapter(this.getParentFragmentManager(),
                 tabLayout.getTabCount());
@@ -45,6 +51,25 @@ public class TabbedFragment extends Fragment {
         viewPager.setAdapter(pagerAdapter);
 
         // To change the tab views
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+//                viewPager.setCurrentItem(position);
+                tabLayout.setScrollPosition(position,0f,true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -71,8 +96,6 @@ public class TabbedFragment extends Fragment {
                 Log.i("tag", "keyCode: " + keyCode);
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     Log.i("", "onKey Back listener is working!!!");
-
-                    WaitingFragment waitingFragment = new WaitingFragment();
 //
 
                     ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(0);
