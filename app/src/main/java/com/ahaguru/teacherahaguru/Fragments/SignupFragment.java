@@ -44,7 +44,6 @@ public class SignupFragment extends Fragment {
 
     Button buttonNext;
     TeacherViewModel teacherViewModel;
-    TextView fullName, phoneNumber, emailAddress, subjects;
 
     EditText name, phone, email;
 

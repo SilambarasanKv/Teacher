@@ -1,59 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    tools:context=".WaitingFragment">
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/tvWaitingForApproval"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
         android:text="Waiting for school approval"
-        android:layout_marginTop="120dp"
         android:textColor="@color/red"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="20dp" />
 
     <TextView
         android:id="@+id/tvReqSubmitted"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/req_submitted"
-        android:layout_below="@id/tvWaitingForApproval"
-        android:layout_marginTop="15dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWaitingForApproval"
+        tools:layout_editor_absoluteX="40dp" />
 
     <TextView
         android:id="@+id/tvYouWillGetEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/you_will_get_email"
-        android:layout_below="@id/tvReqSubmitted"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
         android:lineHeight="27dp"
-        android:textSize="17sp" />
+        android:text="@string/you_will_get_email"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvReqSubmitted"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="192dp" />
 
     <Button
         android:id="@+id/btnApproved"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Approved"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="200dp"
         android:backgroundTint="#2196F3"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="40dp"/>
+        android:text="Approved"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvYouWillGetEmail"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="496dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnRejected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rejected"
-        android:layout_marginRight="40dp"
         android:backgroundTint="#2196F3"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="40dp" />
-</RelativeLayout>
+        android:text="Rejected"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnApproved"
+        tools:layout_editor_absoluteX="215dp"
+        tools:layout_editor_absoluteY="496dp"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

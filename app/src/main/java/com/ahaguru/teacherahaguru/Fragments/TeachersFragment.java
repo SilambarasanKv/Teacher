@@ -25,14 +25,11 @@ import java.util.List;
 
 public class TeachersFragment extends Fragment {
 
-    private ImageView menu;
-    private MenuItem suspend, delete, unsuspend;
 
     TeacherViewModel teacherViewModel;
 
 
     RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
     TeachersAdapter teachersAdapter;
 
     @Override
@@ -41,8 +38,6 @@ public class TeachersFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_teachers, container, false);
 
-        suspend = v.findViewById(R.id.menu_suspend);
-        delete = v.findViewById(R.id.menu_delete);
 
         recyclerView = v.findViewById(R.id.teachersRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -62,7 +57,5 @@ public class TeachersFragment extends Fragment {
         return v;
     }
 
-    private void deleteTeacher(Teachers teacher) {
-        teacherViewModel.delete(teacher);
-    }
+
 }

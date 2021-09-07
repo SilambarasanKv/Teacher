@@ -17,8 +17,6 @@ import com.ahaguru.teacherahaguru.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-import org.jetbrains.annotations.NotNull;
-
 
 public class TabbedFragment extends Fragment {
 
@@ -39,9 +37,6 @@ public class TabbedFragment extends Fragment {
         TabItem tabInvite = v.findViewById(R.id.tabInvite);
         ViewPager viewPager = v.findViewById(R.id.viewPager);
 
-//         PagerAdapter pagerAdapter = new
-//                PagerAdapter(this.getParentFragmentManager(), this.getLifecycle(),
-//                tabLayout.getTabCount());
         PagerAdapter pagerAdapter = new PagerAdapter(this.getParentFragmentManager(),
                 tabLayout.getTabCount());
 

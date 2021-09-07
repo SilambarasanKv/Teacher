@@ -29,10 +29,7 @@ import java.util.List;
 
 public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.MyViewHolder> implements PopupMenu.OnMenuItemClickListener {
 
-    private TeacherRoomDatabase teacherRoomDatabase;
-    private TeacherViewModel teacherViewModel;
     private List<Teachers> teachers = new ArrayList<>();
-    private Context context;
 
 
     PopupMenu popupMenu;
@@ -105,48 +102,13 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.MyView
         private static final String TAG = "MyViewHolder";
         private TextView teacherNameList;
         private ImageView menu;
-        private MenuItem suspend, delete, unsuspend;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             teacherNameList = itemView.findViewById(R.id.teacherNameList);
             menu = itemView.findViewById(R.id.menu);
-            suspend = itemView.findViewById(R.id.menu_suspend);
-            delete = itemView.findViewById(R.id.menu_delete);
 
-//            menu.setOnClickListener(this);
         }
-
-//        @Override
-//        public void onClick(View v) {
-//            showPopupMenu(v);
-//        }
-
-//        private void showPopupMenu(View view) {
-//            PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-//            popupMenu.inflate(R.menu.popup_menu);
-//            popupMenu.setOnMenuItemClickListener(this);
-//            popupMenu.show();
-//        }
-//
-//        @Override
-//        public boolean onMenuItemClick(MenuItem item) {
-//            switch (item.getItemId()) {
-//
-//                case R.id.menu_suspend:
-//                    Log.d(TAG, "onMenuItemClick: menu_suspend");
-//                    return true;
-//
-//                case R.id.menu_delete:
-//                    teachers.remove(position);
-//                                notifyItemChanged(position);
-//                                notifyItemRangeChanged(position, teachers.size());
-//
-//                default:
-//                    return false;
-//
-//            }
-//        }
     }
 }
