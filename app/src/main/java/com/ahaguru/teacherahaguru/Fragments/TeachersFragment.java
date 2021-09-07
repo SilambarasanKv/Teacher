@@ -45,6 +45,7 @@ public class TeachersFragment extends Fragment {
 
         teachersAdapter = new TeachersAdapter();
         recyclerView.setAdapter(teachersAdapter);
+        recyclerView.setItemAnimator(null);
 
         teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
         teacherViewModel.getAllApprovedTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {

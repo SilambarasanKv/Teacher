@@ -67,6 +67,7 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.MyView
                                 teachers.remove(position);
                                 notifyItemChanged(position);
                                 notifyItemRangeChanged(position, teachers.size());
+
                                 return true;
 
                             default:
