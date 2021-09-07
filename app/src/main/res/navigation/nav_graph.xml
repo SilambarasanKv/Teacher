@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.ahaguru.teacherahaguru.Fragments.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_tabbedFragment"
+            app:destination="@id/tabbedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.ahaguru.teacherahaguru.Fragments.SignupFragment"
+        android:label="SignupFragment" >
+        <action
+            android:id="@+id/action_signupFragment_to_codeFragment"
+            app:destination="@id/codeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/codeFragment"
+        android:name="com.ahaguru.teacherahaguru.Fragments.CodeFragment"
+        android:label="CodeFragment" >
+        <action
+            android:id="@+id/action_codeFragment_to_waitingFragment"
+            app:destination="@id/waitingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/waitingFragment"
+        android:name="com.ahaguru.teacherahaguru.Fragments.WaitingFragment"
+        android:label="WaitingFragment" >
+        <action
+            android:id="@+id/action_waitingFragment_to_approvedFragment"
+            app:destination="@id/approvedFragment" />
+        <action
+            android:id="@+id/action_waitingFragment_to_rejectedFragment"
+            app:destination="@id/rejectedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/approvedFragment"
+        android:name="com.ahaguru.teacherahaguru.Fragments.ApprovedFragment"
+        android:label="ApprovedFragment" />
+    <fragment
+        android:id="@+id/rejectedFragment"
+        android:name="com.ahaguru.teacherahaguru.Fragments.RejectedFragment"
+        android:label="RejectedFragment" >
+        <action
+            android:id="@+id/action_rejectedFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tabbedFragment"
+        android:name="com.ahaguru.teacherahaguru.Fragments.TabbedFragment"
+        android:label="TabbedFragment" />
+</navigation>
