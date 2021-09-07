@@ -9,14 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class WaitingFragment extends Fragment {
+
+    NavController navController;
 
     Button buttonApproved, buttonRejected;
 
@@ -34,16 +42,21 @@ public class WaitingFragment extends Fragment {
         buttonApproved = v.findViewById(R.id.btnApproved);
         buttonRejected = v.findViewById(R.id.btnRejected);
 
-        setHasOptionsMenu(true);
+        return v;
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
 
         buttonApproved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(4);
+                navController.navigate(R.id.action_waitingFragment_to_approvedFragment);
 
             }
         });
@@ -52,42 +65,10 @@ public class WaitingFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(5);
+                navController.navigate(R.id.action_waitingFragment_to_rejectedFragment);
 
             }
         });
 
-        v.setFocusableInTouchMode(true);
-        v.requestFocus();
-        v.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.i("tag", "keyCode: " + keyCode);
-                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.i("", "onKey Back listener is working!!!");
-
-                    CodeFragment codeFragment = new CodeFragment();
-//
-
-                    ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(2);
-
-                    return true;
-                }
-                return false;
-            }
-        });
-
-
-        return v;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == android.R.id.home) {
-            ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(2);
-            return true;
-        };
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -10,15 +10,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class RejectedFragment extends Fragment {
+
+    NavController navController;
 
     Button buttonStartAgain;
 
@@ -40,54 +48,24 @@ public class RejectedFragment extends Fragment {
         phone = v.findViewById(R.id.etPhoneNumber);
         email = v.findViewById(R.id.etEmailAddress);
 
-        setHasOptionsMenu(true);
-
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
-        buttonStartAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SignupFragment signupFragment = new SignupFragment();
-                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                    transaction.replace(R.id.mainLayout, signupFragment);
-                    transaction.commit();
-
-                    
-
-            }
-        });
-
-        v.setFocusableInTouchMode(true);
-        v.requestFocus();
-        v.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.i("tag", "keyCode: " + keyCode);
-                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.i("", "onKey Back listener is working!!!");
-
-                    WaitingFragment waitingFragment = new WaitingFragment();
-//
-
-                    ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(3);
-
-                    return true;
-                }
-                return false;
-            }
-        });
 
         return v;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == android.R.id.home) {
-            ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(3);
-            return true;
-        };
-        return super.onOptionsItemSelected(item);
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
+
+        buttonStartAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                navController.navigate(R.id.action_rejectedFragment_to_mainFragment);
+
+            }
+        });
+
     }
 }

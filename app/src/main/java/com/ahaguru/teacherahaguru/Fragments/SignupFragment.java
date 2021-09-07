@@ -15,9 +15,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.MainActivity;
@@ -30,6 +34,8 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class SignupFragment extends Fragment {
+
+    NavController navController;
 
     public static final String EXTRA_NAME =
             "com.ahaguru.teacherahaguru.Fragments.EXTRA_NAME";
@@ -89,10 +95,6 @@ public class SignupFragment extends Fragment {
 
         buttonNext = v.findViewById(R.id.btnNext);
 
-        /*fullName = v.findViewById(R.id.tvFullname);
-//        phoneNumber = v.findViewById(R.id.tvPhoneNumber);
-        emailAddress = v.findViewById(R.id.tvEmailAddress);
-        subjects = v.findViewById(R.id.tvSubjects);*/
 
         name = v.findViewById(R.id.etFullName);
         phone = v.findViewById(R.id.etPhoneNumber);
@@ -105,19 +107,25 @@ public class SignupFragment extends Fragment {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(arrayAdapter);
 
-        setHasOptionsMenu(true);
-
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
 
         teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
+
+        return v;
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
+
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 isAllFieldsChecked = CheckAllFields();
-
 
                 if (isAllFieldsChecked) {
 
@@ -129,49 +137,16 @@ public class SignupFragment extends Fragment {
                     Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail,teacherSubject, ConstantData.PENDING);
                     teacherViewModel.insert(teachers);
 
-                    ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(2);
+                    navController.navigate(R.id.action_signupFragment_to_codeFragment);
 
                 }
-
 
             }
 
         });
-
-        v.setFocusableInTouchMode(true);
-        v.requestFocus();
-        v.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.i("tag", "keyCode: " + keyCode);
-                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.i("", "onKey Back listener is working!!!");
-
-                    WaitingFragment waitingFragment = new WaitingFragment();
-//
-
-                    ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(0);
-
-                    return true;
-                }
-                return false;
-            }
-        });
-
-
-        return v;
-
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(0);
-            return true;
-        }
-        ;
-        return super.onOptionsItemSelected(item);
-    }
+
 
     private boolean CheckAllFields() {
 

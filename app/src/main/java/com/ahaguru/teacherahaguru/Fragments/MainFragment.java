@@ -2,7 +2,12 @@ package com.ahaguru.teacherahaguru.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +18,8 @@ import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
 
 public class MainFragment extends Fragment {
+
+    NavController navController;
 
     Button btnSignup, btnManageTeachers;
 
@@ -30,11 +37,23 @@ public class MainFragment extends Fragment {
         btnSignup = v.findViewById(R.id.btnSignup);
         btnManageTeachers = v.findViewById(R.id.btnManageTeachers);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
+
+        btnSignup = view.findViewById(R.id.btnSignup);
+        btnManageTeachers = view.findViewById(R.id.btnManageTeachers);
+
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(1);
+                navController.navigate(R.id.action_mainFragment_to_signupFragment);
 
             }
         });
@@ -43,11 +62,9 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(6);
+                navController.navigate(R.id.action_mainFragment_to_tabbedFragment);
 
             }
         });
-
-        return v;
     }
 }

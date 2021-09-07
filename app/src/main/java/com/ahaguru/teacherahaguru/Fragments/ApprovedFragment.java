@@ -31,40 +31,7 @@ public class ApprovedFragment extends Fragment {
 
         buttonProceed = v.findViewById(R.id.btnProceed);
 
-        setHasOptionsMenu(true);
-
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
-        v.setFocusableInTouchMode(true);
-        v.requestFocus();
-        v.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.i("tag", "keyCode: " + keyCode);
-                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.i("", "onKey Back listener is working!!!");
-
-                    WaitingFragment waitingFragment = new WaitingFragment();
-//
-
-                    ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(3);
-
-                    return true;
-                }
-                return false;
-            }
-        });
-
         return v;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == android.R.id.home) {
-            ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(3);
-            return true;
-        };
-        return super.onOptionsItemSelected(item);
-    }
 }

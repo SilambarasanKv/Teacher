@@ -11,9 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.MainActivity;
@@ -22,9 +26,11 @@ import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
 
+import org.jetbrains.annotations.NotNull;
+
 public class CodeFragment extends Fragment {
 
- //   TeacherViewModel teacherViewModel;
+    NavController navController;
     Button buttonSubmit;
 
     EditText code;
@@ -49,12 +55,15 @@ public class CodeFragment extends Fragment {
 
         code.setTransformationMethod(new AsteriskPasswordTransformationMethod());
 
-        setHasOptionsMenu(true);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        return v;
+    }
 
-//        teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,42 +71,13 @@ public class CodeFragment extends Fragment {
 
                 isAllFieldsChecked = CheckAllFields();
 
-                if(isAllFieldsChecked) {
+                if (isAllFieldsChecked) {
 
-
-                    ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(3);
+                    navController.navigate(R.id.action_codeFragment_to_waitingFragment);
                 }
 
             }
         });
-        v.setFocusableInTouchMode(true);
-        v.requestFocus();
-        v.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.i("tag", "keyCode: " + keyCode);
-                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.i("", "onKey Back listener is working!!!");
-
-
-                    ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(1);
-
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        return v;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == android.R.id.home) {
-            ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(1);
-            return true;
-        };
-        return super.onOptionsItemSelected(item);
     }
 
     private boolean CheckAllFields() {

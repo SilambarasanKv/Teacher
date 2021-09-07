@@ -39,11 +39,6 @@ public class TabbedFragment extends Fragment {
         TabItem tabInvite = v.findViewById(R.id.tabInvite);
         ViewPager viewPager = v.findViewById(R.id.viewPager);
 
-        setHasOptionsMenu(true);
-
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
         PagerAdapter pagerAdapter = new
                 PagerAdapter(this.getParentFragmentManager(),
                 tabLayout.getTabCount());
@@ -88,33 +83,8 @@ public class TabbedFragment extends Fragment {
             }
         });
 
-        v.setFocusableInTouchMode(true);
-        v.requestFocus();
-        v.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.i("tag", "keyCode: " + keyCode);
-                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.i("", "onKey Back listener is working!!!");
-//
-
-                    ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(0);
-
-                    return true;
-                }
-                return false;
-            }
-        });
 
         return v;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == android.R.id.home) {
-            ((MainActivity) getActivity()).getFragmentStateSaver().changeFragment(0);
-            return true;
-        };
-        return super.onOptionsItemSelected(item);
-    }
 }

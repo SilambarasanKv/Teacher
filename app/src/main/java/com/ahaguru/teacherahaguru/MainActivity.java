@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
 import com.ahaguru.teacherahaguru.Fragments.ApprovedFragment;
@@ -21,9 +24,11 @@ public class MainActivity extends AppCompatActivity {
     public FragmentStateSaver fragmentStateSaver;
     Toolbar toolbar;
 
-    public static TeacherRoomDatabase teacherRoomDatabase;
+    NavController navController;
 
-   // SignupFragment signupFragment;
+    NavHostFragment navHostFragment;
+
+    public static TeacherRoomDatabase teacherRoomDatabase;
 
     MainFragment mainFragment;
 
@@ -37,61 +42,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("Teacher");
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
 
-        teacherRoomDatabase = Room.databaseBuilder(getApplicationContext(), TeacherRoomDatabase.class, "teacher_table").allowMainThreadQueries().build();
+        navController = navHostFragment.getNavController();
 
-        fragmentStateSaver = new FragmentStateSaver(findViewById(R.id.mainLayout), getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                switch (position) {
-
-                    case 0:
-                        return new MainFragment();
-                    case 1:
-                        return new SignupFragment();
-                    case 2:
-                        return new CodeFragment();
-
-                    case 3:
-                        return new WaitingFragment();
-
-                    case 4:
-                        return new ApprovedFragment();
-
-                    case 5:
-                        return new RejectedFragment();
-
-                    case 6:
-                        return new TabbedFragment();
-
-                    default:
-                        return new MainFragment();
-                }
-            }
-        };
-        fragmentStateSaver.changeFragment(0);
-
-//        signupFragment = new SignupFragment();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//        fragmentManager.beginTransaction().add(R.id.mainLayout, signupFragment).commit();
-
-
+        NavigationUI.setupActionBarWithNavController(this, navController);
 
     }
-
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public boolean onSupportNavigateUp() {
 
-        //Save the fragment's instance
-        getSupportFragmentManager().putFragment(outState, "mainFragment", mainFragment);
+        navController.navigateUp();
+
+        return super.onSupportNavigateUp();
     }
-
-
-
 }
