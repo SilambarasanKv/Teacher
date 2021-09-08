@@ -12,7 +12,7 @@ import com.ahaguru.teacherahaguru.Entity.Teachers;
 
 import org.jetbrains.annotations.NotNull;
 
-@Database(entities = {Teachers.class}, version = 2, exportSchema = false)
+@Database(entities = {Teachers.class}, version = 3, exportSchema = false)
 public abstract class TeacherRoomDatabase extends RoomDatabase {
 
     private static TeacherRoomDatabase instance;
