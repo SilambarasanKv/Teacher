@@ -3,6 +3,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="tv_full_name">Full Name</string>
+    <string name="et_full_name">Enter Your Full Name</string>
+    <string name="tv_phone_number">Phone Number</string>
+    <string name="et_phone_number">Enter Your Phone Number</string>
+    <string name="tv_email_address">Email Address</string>
+    <string name="et_email_address">Enter Your Email Address</string>
+    <string name="tv_subjects">Subjects</string>
+    <string name="next">Next</string>
+
     <string name="enter_code">Please enter the teacher code shared by your school</string>
 
     <string name="req_submitted">Your request has been submitted to the school</string>
