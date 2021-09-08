@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:paddingTop="25dp"
+            android:paddingTop="20dp"
             android:paddingRight="12dp"
             android:paddingBottom="25dp">
 
@@ -27,7 +27,7 @@
                 android:id="@+id/tvInviteTeachers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Invite Teachers"
+                android:text="@string/invite_teachers"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -55,7 +55,8 @@
                 android:text="XCB001"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/tvShareCode"
@@ -64,8 +65,8 @@
                 android:layout_below="@id/tvShareCodeBig"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="30dp"
-                android:layout_toRightOf="@+id/tvCode"
-                android:text="Share teacher code"
+                android:layout_toEndOf="@+id/tvCode"
+                android:text="@string/share_teacher_code"
                 android:textSize="16sp" />
 
             <ImageView
@@ -75,10 +76,12 @@
                 android:layout_below="@id/tvShareCodeBig"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="30dp"
-                android:layout_toRightOf="@id/tvShareCode"
+                android:layout_toEndOf="@id/tvShareCode"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_content_copy_24"
-                app:tint="#008EFF" />
+                app:tint="#008EFF"
+                tools:ignore="ContentDescription"
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/ivShare"
@@ -87,11 +90,13 @@
                 android:layout_below="@id/tvShareCodeBig"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="30dp"
-                android:layout_toRightOf="@id/ivCopy"
+                android:layout_toEndOf="@id/ivCopy"
                 android:backgroundTint="#008EFF"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_share_24"
-                app:tint="#008EFF" />
+                app:tint="#008EFF"
+                tools:ignore="ContentDescription,UnusedAttribute"
+                android:focusable="true" />
 
 
         </RelativeLayout>

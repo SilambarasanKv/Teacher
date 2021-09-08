@@ -23,17 +23,31 @@
     <string name="approved">Approved</string>
     <string name="rejected">Rejected</string>
 
+    <string name="congratulations">Congratulations</string>
+    <string name="your_request_has_been_approved">Your request has been approved</string>
+    <string name="proceed">Proceed</string>
 
+    <string name="oops">Oops!</string>
     <string name="req_denied">Your request has been denied by the school</string>
     <string name="try_again">Try again with the correct details</string>
+    <string name="start_again">Start Again!</string>
 
-    <string name="hint_word">Word...</string>
+    <string name="hint_word">Word.</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
 
-    <string name="first">Teachers</string>
-    <string name="second">Requests</string>
-    <string name="third">Invite</string>
+    <string name="invite_teachers">Invite Teachers</string>
+    <string name="share_teacher_code">Share teacher code</string>
+
+
+    <string name="teachers">Teachers</string>
+    <string name="requests">Requests</string>
+    <string name="invite">Invite</string>
+
+    <string name="name">Name</string>
+
+    <string name="sign_up">Sign Up</string>
+    <string name="manage_teachers">Manage Teachers</string>
 
     <string name="share_code">Share this code with your teacher to join the app</string>
 </resources>

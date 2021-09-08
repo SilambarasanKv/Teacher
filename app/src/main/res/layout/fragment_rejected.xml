@@ -5,67 +5,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:layout_margin="20dp">
 
     <ImageView
         android:id="@+id/ivOops"
         android:layout_width="60sp"
         android:layout_height="70sp"
-        android:src="@drawable/oops"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/oops"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/oops" />
 
     <TextView
         android:id="@+id/tvOops"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Oops!"
+        android:layout_marginTop="10dp"
         android:gravity="center"
+        android:text="@string/oops"
         android:textColor="@color/red"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivOops"/>
+        app:layout_constraintTop_toBottomOf="@+id/ivOops" />
 
     <TextView
         android:id="@+id/tvReqDenied"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="@string/req_denied"
         android:textColor="@color/black"
         android:textSize="17sp"
-        app:layout_constraintTop_toBottomOf="@+id/tvOops"
-        tools:layout_editor_absoluteX="20dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvOops" />
 
     <TextView
         android:id="@+id/tvTryAgain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvReqDenied"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/try_again"
         android:textSize="17sp"
-        android:layout_marginTop="10dp"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="381dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvReqDenied"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvReqDenied" />
 
     <Button
         android:id="@+id/btnStartAgain"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Start Again"
-        android:backgroundTint="#2196F3"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#2196F3"
+        android:text="@string/start_again"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTryAgain"/>
+        tools:targetApi="lollipop" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
