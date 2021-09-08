@@ -48,8 +48,6 @@ public class CodeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_code, container, false);
 
-        spin = (Spinner) v.findViewById(R.id.spinner);
-
         buttonSubmit = v.findViewById(R.id.btnSubmit);
         code = v.findViewById(R.id.etCode);
 
@@ -65,18 +63,15 @@ public class CodeFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonSubmit.setOnClickListener(v -> {
 
-                isAllFieldsChecked = CheckAllFields();
+            isAllFieldsChecked = CheckAllFields();
 
-                if (isAllFieldsChecked) {
+            if (isAllFieldsChecked) {
 
-                    navController.navigate(R.id.action_codeFragment_to_waitingFragment);
-                }
-
+                navController.navigate(R.id.action_codeFragment_to_waitingFragment);
             }
+
         });
     }
 

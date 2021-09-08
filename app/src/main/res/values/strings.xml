@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">TeacherAhaguru</string>
     <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="subjects">
+        <item>English</item>
+        <item>Chemistry</item>
+        <item>Mathematics</item>
+        <item>Biology</item>
+    </string-array>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="tv_full_name">Full Name</string>
@@ -50,4 +59,7 @@
     <string name="manage_teachers">Manage Teachers</string>
 
     <string name="share_code">Share this code with your teacher to join the app</string>
+
+    <string name="subjects_list">Subjects List</string>
+    <string name="english">English</string>
 </resources>

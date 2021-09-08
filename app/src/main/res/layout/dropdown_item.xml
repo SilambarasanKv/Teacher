@@ -1,0 +1,12 @@
+<TextView
+    android:id="@+id/subjectsList"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="14dp"
+    android:text="@string/subjects_list"
+    android:textColor="@color/black"
+    android:textSize="15sp">
+
+</TextView>
+

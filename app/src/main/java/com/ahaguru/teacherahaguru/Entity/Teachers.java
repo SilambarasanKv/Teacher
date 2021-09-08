@@ -18,18 +18,19 @@ public class Teachers {
 
     private String phone_number;
 
-    private String subject;
+//    private String subject;
 
     private int status;
 
 
-    public Teachers(String name, String phone_number, String email, String subject, int status) {
+    public Teachers(String name, String phone_number, String email, int status) {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
-        this.subject = subject;
+//        this.subject = subject;
         this.status = status;
     }
+
 
 //    public Teachers(int id) {
 //        this.id = id;
@@ -44,17 +45,17 @@ public class Teachers {
         return phone_number;
     }
 
-    public String getSubject() {
-        return subject;
-    }
+// //   public String getSubject() {
+//        return subject;
+//    }
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+// //   public void setSubject(String subject) {
+//        this.subject = subject;
+//    }
 
     public void setStatus(int status) {
         this.status = status;

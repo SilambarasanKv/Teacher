@@ -87,14 +87,23 @@
         app:layout_constraintTop_toBottomOf="@+id/etEmailAddress"
         tools:ignore="MissingConstraints" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="376dp"
-        android:layout_height="32dp"
-        android:layout_below="@+id/tvSubjects"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubjects" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSubjects">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/english"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnNext"
@@ -105,5 +114,6 @@
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:targetApi="lollipop" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

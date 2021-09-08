@@ -1,34 +1,31 @@
 package com.ahaguru.teacherahaguru.Fragments;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
+
 import android.view.LayoutInflater;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
-import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.Repository.TeachersRepository;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
+
+import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -36,6 +33,7 @@ import static android.app.Activity.RESULT_OK;
 public class SignupFragment extends Fragment {
 
     NavController navController;
+    ArrayAdapter arrayAdapter;
 
     public static final String EXTRA_NAME =
             "com.ahaguru.teacherahaguru.Fragments.EXTRA_NAME";
@@ -44,14 +42,10 @@ public class SignupFragment extends Fragment {
 
     Button buttonNext;
     TeacherViewModel teacherViewModel;
-
     EditText name, phone, email;
+    AutoCompleteTextView autoCompleteTextView;
 
     boolean isAllFieldsChecked = false;
-
-    String[] subLists = {"English", "Chemistry", "Mathematics", "Biology"};
-
-    Spinner spin;
 
     private String bundleFullname;
     private final String bundleFullnameVAL = "bundleFullnameVAL";
@@ -99,13 +93,12 @@ public class SignupFragment extends Fragment {
         phone = v.findViewById(R.id.etPhoneNumber);
         email = v.findViewById(R.id.etEmailAddress);
 
-        spin = (Spinner) v.findViewById(R.id.spinner);
+        autoCompleteTextView = v.findViewById(R.id.autoCompleteTextView);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, subLists);
-
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(arrayAdapter);
-
+        String[] subjects;
+        subjects = getResources().getStringArray(R.array.subjects);
+        arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdown_item, subjects);
+        autoCompleteTextView.setAdapter(arrayAdapter);
 
         teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
 
@@ -120,25 +113,20 @@ public class SignupFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
 
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonNext.setOnClickListener(v -> {
 
-                isAllFieldsChecked = CheckAllFields();
+            isAllFieldsChecked = CheckAllFields();
 
-                if (isAllFieldsChecked) {
+            if (isAllFieldsChecked) {
 
-                    String teacherName = name.getText().toString();
-                    String teacherPhone = phone.getText().toString();
-                    String teacherMail = email.getText().toString();
-                    String teacherSubject = spin.getSelectedItem().toString();
+                String teacherName = name.getText().toString();
+                String teacherPhone = phone.getText().toString();
+                String teacherMail = email.getText().toString();
 
-                    Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail,teacherSubject, ConstantData.PENDING);
-                    teacherViewModel.insert(teachers);
+                Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, ConstantData.PENDING);
+                teacherViewModel.insert(teachers);
 
-                    navController.navigate(R.id.action_signupFragment_to_codeFragment);
-
-                }
+                navController.navigate(R.id.action_signupFragment_to_codeFragment);
 
             }
 
