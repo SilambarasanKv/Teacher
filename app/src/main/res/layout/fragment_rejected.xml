@@ -7,56 +7,56 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp">
 
-    <ImageView
-        android:id="@+id/ivOops"
-        android:layout_width="60sp"
-        android:layout_height="70sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:src="@drawable/oops"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/oops" />
-
-    <TextView
-        android:id="@+id/tvOops"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/oops"
-        android:textColor="@color/red"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivOops" />
-
-    <TextView
-        android:id="@+id/tvReqDenied"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="@string/req_denied"
-        android:textColor="@color/black"
-        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnStartAgain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOops" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvTryAgain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvReqDenied"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/try_again"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvReqDenied" />
+
+        <ImageView
+            android:id="@+id/ivOops"
+            android:layout_width="60sp"
+            android:layout_height="70sp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/oops" />
+
+        <TextView
+            android:id="@+id/tvOops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/oops"
+            android:textColor="@color/red"
+            android:textSize="25sp"
+            android:layout_below="@id/ivOops"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tvReqDenied"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="@string/req_denied"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:layout_below="@id/tvOops" />
+
+        <TextView
+            android:id="@+id/tvTryAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvReqDenied"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/try_again"
+            android:textSize="17sp" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnStartAgain"
