@@ -44,7 +44,7 @@ public class SignupFragment extends Fragment {
 
     Button buttonNext;
     TeacherViewModel teacherViewModel;
-    EditText name, phone, email;
+    TextInputLayout name, phone, email, subject;
     AutoCompleteTextView autoCompleteTextView;
 
     boolean isAllFieldsChecked = false;
@@ -94,6 +94,7 @@ public class SignupFragment extends Fragment {
         name = v.findViewById(R.id.etFullName);
         phone = v.findViewById(R.id.etPhoneNumber);
         email = v.findViewById(R.id.etEmailAddress);
+        subject = v.findViewById(R.id.etSubject);
 
         autoCompleteTextView = v.findViewById(R.id.autoCompleteTextView);
 
@@ -117,44 +118,78 @@ public class SignupFragment extends Fragment {
 
         buttonNext.setOnClickListener(v -> {
 
-            isAllFieldsChecked = CheckAllFields();
+            isAllFieldsChecked = !validateName() | !validatePhone() | !validateEmail() | !validateSubject();
 
             if (isAllFieldsChecked) {
-
-                String teacherName = name.getText().toString();
-                String teacherPhone = phone.getText().toString();
-                String teacherMail = email.getText().toString();
+                return;
+            } else {
+                String teacherName = name.getEditText().getText().toString();
+                String teacherPhone = phone.getEditText().getText().toString();
+                String teacherMail = email.getEditText().getText().toString();
 
                 Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, ConstantData.PENDING);
                 teacherViewModel.insert(teachers);
 
                 navController.navigate(R.id.action_signupFragment_to_codeFragment);
-
             }
 
         });
     }
 
+    private boolean validateName() {
+
+        String nameInput = name.getEditText().getText().toString();
 
 
-    private boolean CheckAllFields() {
+        if (!nameInput.isEmpty()) {
+            name.setError(null);
+            return true;
+        }
+        else {
+               name.setError("Enter your full name");
+               return false;
+        }
+    }
 
-        String emailInput = email.getText().toString();
+    private boolean validatePhone() {
+        String phoneInput = phone.getEditText().getText().toString();
 
-        if (name.length() == 0) {
-            name.setError("Your name is required");
+        if (!phoneInput.isEmpty() && !(phoneInput.length() < 10)) {
+            phone.setError(null);
+            return true;
+        }
+        else {
+            phone.setError("Enter the correct phone number");
             return false;
         }
+    }
 
-        if (phone.length() < 10) {
-            phone.setError("Enter the correct mobile number");
-            return false;
-        }
+
+    private boolean validateEmail() {
+
+        String emailInput = email.getEditText().getText().toString();
+
 
         if (!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            email.setError(null);
             return true;
         } else {
-            email.setError("Please enter the valid email address");
+            email.setError("Enter the valid email address");
+            return false;
+        }
+
+    }
+
+    private boolean validateSubject() {
+
+        String subjectInput = subject.getEditText().getText().toString();
+
+
+        if (!subjectInput.isEmpty()) {
+            subject.setError(null);
+            return true;
+        } else {
+            subject.setError("Select the subject");
             return false;
         }
 

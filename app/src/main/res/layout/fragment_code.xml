@@ -33,26 +33,24 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTeacherCode" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/messageTextInputLayout"
+        android:id="@+id/etCode"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/et_enter_code"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEnterCode">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:letterSpacing="1.4"
             android:maxLength="8"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="384dp" />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

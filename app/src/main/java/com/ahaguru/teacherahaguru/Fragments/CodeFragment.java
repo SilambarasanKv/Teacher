@@ -25,6 +25,7 @@ import com.ahaguru.teacherahaguru.AsteriskPassword.AsteriskPasswordTransformatio
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +34,7 @@ public class CodeFragment extends Fragment {
     NavController navController;
     Button buttonSubmit;
 
-    EditText code;
+    TextInputLayout code;
     Spinner spin;
 
     boolean isAllFieldsChecked = false;
@@ -51,7 +52,7 @@ public class CodeFragment extends Fragment {
         buttonSubmit = v.findViewById(R.id.btnSubmit);
         code = v.findViewById(R.id.etCode);
 
-        code.setTransformationMethod(new AsteriskPasswordTransformationMethod());
+      //  code.setTransformationMethod(new AsteriskPasswordTransformationMethod());
 
 
         return v;
@@ -65,24 +66,31 @@ public class CodeFragment extends Fragment {
 
         buttonSubmit.setOnClickListener(v -> {
 
-            isAllFieldsChecked = CheckAllFields();
+            isAllFieldsChecked = !validateCode();
 
             if (isAllFieldsChecked) {
-
+                return;
+            }
+            else {
                 navController.navigate(R.id.action_codeFragment_to_waitingFragment);
             }
 
         });
     }
 
-    private boolean CheckAllFields() {
+    private boolean validateCode() {
 
-        if(code.length() < 8) {
+        String codeInput = code.getEditText().getText().toString();
+
+
+        if (!codeInput.isEmpty() && !(codeInput.length() < 8)) {
+            code.setError(null);
+            return true;
+        } else {
             code.setError("Enter the correct code");
             return false;
         }
 
-        return true;
     }
 
 }
