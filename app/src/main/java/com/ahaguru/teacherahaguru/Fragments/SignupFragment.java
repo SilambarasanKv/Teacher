@@ -3,6 +3,7 @@ package com.ahaguru.teacherahaguru.Fragments;
 
 import android.os.Bundle;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +24,8 @@ import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
@@ -137,6 +139,8 @@ public class SignupFragment extends Fragment {
 
     private boolean CheckAllFields() {
 
+        String emailInput = email.getText().toString();
+
         if (name.length() == 0) {
             name.setError("Your name is required");
             return false;
@@ -145,13 +149,14 @@ public class SignupFragment extends Fragment {
         if (phone.length() < 10) {
             phone.setError("Enter the correct mobile number");
             return false;
-        } else if (email.length() == 0) {
-            email.setError("Your email address is required");
-            return false;
         }
 
-
-        return true;
+        if (!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            return true;
+        } else {
+            email.setError("Please enter the valid email address");
+            return false;
+        }
 
     }
 

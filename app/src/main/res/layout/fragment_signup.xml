@@ -27,7 +27,8 @@
         android:autofillHints="@string/et_full_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFullName"
+        />
 
     <TextView
         android:id="@+id/tvPhoneNumber"
