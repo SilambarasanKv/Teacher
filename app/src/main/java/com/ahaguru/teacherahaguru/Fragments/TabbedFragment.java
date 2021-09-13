@@ -1,27 +1,23 @@
 package com.ahaguru.teacherahaguru.Fragments;
 
 import android.os.Bundle;
-
-
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
+import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
-
-
 import com.ahaguru.teacherahaguru.Adapter.PagerAdapter;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentTabbedBinding;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 
 public class TabbedFragment extends Fragment {
 
     FragmentTabbedBinding binding;
+    ViewPager2 viewPager;
+    TabLayout tabLayout;
+    PagerAdapter pagerAdapter;
 
     public TabbedFragment() {
         // Required empty public constructor
@@ -34,23 +30,22 @@ public class TabbedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tabbed, container, false);
         binding = FragmentTabbedBinding.bind(v);
 
-        TabLayout tabLayout = binding.tabLayout;
-        ViewPager viewPager = binding.viewPager;
+        tabLayout = binding.tabLayout;
+        viewPager = binding.viewPager;
 
-//        TabLayout tabLayout = v.findViewById(R.id.tabLayout);
-//        TabItem tabTeachers = v.findViewById(R.id.tabTeachers);
-//        TabItem tabRequests = v.findViewById(R.id.tabRequests);
-//        TabItem tabInvite = v.findViewById(R.id.tabInvite);
-//        ViewPager viewPager = v.findViewById(R.id.viewPager);
-
-        PagerAdapter pagerAdapter = new PagerAdapter(this.getParentFragmentManager(),
+        PagerAdapter pagerAdapter = new PagerAdapter(getParentFragment().getActivity(),
                 tabLayout.getTabCount());
-
         viewPager.setAdapter(pagerAdapter);
+
+//        PagerAdapter pagerAdapter = new PagerAdapter(this.getParentFragmentManager(),
+//                tabLayout.getTabCount());
+//
+//        viewPager.setAdapter(pagerAdapter);
+
 
         // To change the tab views
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
