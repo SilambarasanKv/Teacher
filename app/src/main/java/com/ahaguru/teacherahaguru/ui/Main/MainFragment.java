@@ -1,4 +1,4 @@
-package com.ahaguru.teacherahaguru.Fragments;
+package com.ahaguru.teacherahaguru.ui.Main;
 
 import android.os.Bundle;
 

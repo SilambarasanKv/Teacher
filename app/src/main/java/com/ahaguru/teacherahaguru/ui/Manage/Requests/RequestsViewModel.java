@@ -1,5 +1,5 @@
 
-package com.ahaguru.teacherahaguru.ViewModel;
+package com.ahaguru.teacherahaguru.ui.Manage.Requests;
 
 import android.app.Application;
 
@@ -13,7 +13,7 @@ import com.ahaguru.teacherahaguru.Repository.TeachersRepository;
 
 import java.util.List;
 
-public class TeacherViewModel extends AndroidViewModel {
+public class RequestsViewModel extends AndroidViewModel {
 
 
     private TeachersRepository repository;
@@ -21,7 +21,7 @@ public class TeacherViewModel extends AndroidViewModel {
     private LiveData<List<Teachers>> allTeachers;
     private LiveData<List<Teachers>> allTeachers2;
 
-    public TeacherViewModel(@NonNull Application application) {
+    public RequestsViewModel(@NonNull Application application) {
         super(application);
         repository = new TeachersRepository(application);
         allTeachers = repository.getAllPendingTeachers();

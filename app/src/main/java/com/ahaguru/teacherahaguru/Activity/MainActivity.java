@@ -6,7 +6,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
-import com.ahaguru.teacherahaguru.Adapter.PagerAdapter;
+
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.utils.FragmentStateSaver;
 import com.google.android.material.tabs.TabLayout;

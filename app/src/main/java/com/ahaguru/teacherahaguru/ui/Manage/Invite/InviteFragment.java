@@ -1,4 +1,4 @@
-package com.ahaguru.teacherahaguru.Fragments;
+package com.ahaguru.teacherahaguru.ui.Manage.Invite;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;

@@ -1,4 +1,4 @@
-package com.ahaguru.teacherahaguru.Fragments;
+package com.ahaguru.teacherahaguru.ui.Manage.Requests;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,13 +12,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.ahaguru.teacherahaguru.Adapter.RequestsAdapter;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
 import com.ahaguru.teacherahaguru.databinding.FragmentRequestsBinding;
 import com.ahaguru.teacherahaguru.utils.TeacherRequestListener;
 
@@ -28,7 +24,7 @@ import java.util.List;
 
 public class RequestsFragment extends Fragment implements TeacherRequestListener {
     private List<Teachers> teachers = new ArrayList<>();
-    TeacherViewModel teacherViewModel;
+    RequestsViewModel requestsViewModel;
     RequestsAdapter requestsAdapter;
     FragmentRequestsBinding binding;
     NavController navController;
@@ -58,8 +54,8 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
-        teacherViewModel.getAllPendingTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
+        requestsViewModel = new ViewModelProvider(getActivity()).get(RequestsViewModel.class);
+        requestsViewModel.getAllPendingTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
             @Override
             public void onChanged(List<Teachers> list) {
                 requestsAdapter.setTeachers(list);
@@ -72,9 +68,9 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
     @Override
     public void onApprove(Teachers teacher) {
         teacher.setStatus(1);
-        teacherViewModel.update(teacher);
+        requestsViewModel.update(teacher);
 
-        teacherViewModel.getAllPendingTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
+        requestsViewModel.getAllPendingTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
             @Override
             public void onChanged(List<Teachers> list) {
                 requestsAdapter.setTeachers(list);
@@ -86,7 +82,7 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
     @Override
     public void onReject(Teachers teacher) {
         teacher.setStatus(2);
-        teacherViewModel.update(teacher);
+        requestsViewModel.update(teacher);
     }
 
     @Override

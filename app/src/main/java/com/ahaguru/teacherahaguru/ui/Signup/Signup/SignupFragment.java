@@ -1,4 +1,4 @@
-package com.ahaguru.teacherahaguru.Fragments;
+package com.ahaguru.teacherahaguru.ui.Signup.Signup;
 
 
 import android.os.Bundle;
@@ -9,9 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,23 +19,16 @@ import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
+import com.ahaguru.teacherahaguru.ui.Manage.Requests.RequestsViewModel;
 import com.ahaguru.teacherahaguru.databinding.FragmentSignupBinding;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.ArrayList;
-
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
 
 public class SignupFragment extends Fragment {
 
     NavController navController;
     ArrayAdapter arrayAdapter;
     FragmentSignupBinding binding;
-    TeacherViewModel teacherViewModel;
+    RequestsViewModel requestsViewModel;
 
     public static final String EXTRA_NAME =
             "com.ahaguru.teacherahaguru.Fragments.EXTRA_NAME";
@@ -92,7 +82,7 @@ public class SignupFragment extends Fragment {
         arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdown_item, subjects);
         binding.autoCompleteTextView.setAdapter(arrayAdapter);
 
-        teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
+        requestsViewModel = new ViewModelProvider(getActivity()).get(RequestsViewModel.class);
 
         return v;
 
@@ -117,7 +107,7 @@ public class SignupFragment extends Fragment {
                 String teacherMail = binding.etEmailAddress.getEditText().getText().toString();
 
                 Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, ConstantData.PENDING);
-                teacherViewModel.insert(teachers);
+                requestsViewModel.insert(teachers);
 
                 navController.navigate(R.id.action_signupFragment_to_codeFragment);
             }

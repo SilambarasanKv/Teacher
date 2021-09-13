@@ -1,4 +1,4 @@
-package com.ahaguru.teacherahaguru.Fragments;
+package com.ahaguru.teacherahaguru.ui.Signup.Waiting;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

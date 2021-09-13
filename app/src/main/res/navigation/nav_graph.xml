@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.ahaguru.teacherahaguru.Fragments.MainFragment"
+        android:name="com.ahaguru.teacherahaguru.ui.Main.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment_to_signupFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.ahaguru.teacherahaguru.Fragments.SignupFragment"
+        android:name="com.ahaguru.teacherahaguru.ui.Signup.Signup.SignupFragment"
         android:label="SignupFragment" >
         <action
             android:id="@+id/action_signupFragment_to_codeFragment"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/codeFragment"
-        android:name="com.ahaguru.teacherahaguru.Fragments.CodeFragment"
+        android:name="com.ahaguru.teacherahaguru.ui.Signup.Code.CodeFragment"
         android:label="CodeFragment" >
         <action
             android:id="@+id/action_codeFragment_to_waitingFragment"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/waitingFragment"
-        android:name="com.ahaguru.teacherahaguru.Fragments.WaitingFragment"
+        android:name="com.ahaguru.teacherahaguru.ui.Signup.Waiting.WaitingFragment"
         android:label="WaitingFragment" >
         <action
             android:id="@+id/action_waitingFragment_to_approvedFragment"
@@ -44,11 +44,11 @@
     </fragment>
     <fragment
         android:id="@+id/approvedFragment"
-        android:name="com.ahaguru.teacherahaguru.Fragments.ApprovedFragment"
+        android:name="com.ahaguru.teacherahaguru.ui.Signup.Approve.ApprovedFragment"
         android:label="ApprovedFragment" />
     <fragment
         android:id="@+id/rejectedFragment"
-        android:name="com.ahaguru.teacherahaguru.Fragments.RejectedFragment"
+        android:name="com.ahaguru.teacherahaguru.ui.Signup.Reject.RejectedFragment"
         android:label="RejectedFragment" >
         <action
             android:id="@+id/action_rejectedFragment_to_mainFragment"
@@ -56,6 +56,6 @@
     </fragment>
     <fragment
         android:id="@+id/tabbedFragment"
-        android:name="com.ahaguru.teacherahaguru.Fragments.TabbedFragment"
+        android:name="com.ahaguru.teacherahaguru.ui.Manage.Tabbed.TabbedFragment"
         android:label="TabbedFragment" />
 </navigation>

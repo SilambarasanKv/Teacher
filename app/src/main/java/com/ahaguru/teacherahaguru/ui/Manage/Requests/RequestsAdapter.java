@@ -1,25 +1,16 @@
-package com.ahaguru.teacherahaguru.Adapter;
+package com.ahaguru.teacherahaguru.ui.Manage.Requests;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.ahaguru.teacherahaguru.Entity.Teachers;
-import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
 import com.ahaguru.teacherahaguru.databinding.RequestsCardBinding;
 import com.ahaguru.teacherahaguru.utils.TeacherRequestListener;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 

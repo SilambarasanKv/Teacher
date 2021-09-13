@@ -1,4 +1,4 @@
-package com.ahaguru.teacherahaguru.Adapter;
+package com.ahaguru.teacherahaguru.ui.Manage.Teachers;
 
 
 import android.view.LayoutInflater;

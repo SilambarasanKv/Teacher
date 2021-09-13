@@ -1,29 +1,20 @@
-package com.ahaguru.teacherahaguru.Fragments;
+package com.ahaguru.teacherahaguru.ui.Manage.Teachers;
 
-import android.hardware.ConsumerIrManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.ahaguru.teacherahaguru.Adapter.TeachersAdapter;
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.Room.TeacherRoomDatabase;
-import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
+import com.ahaguru.teacherahaguru.ui.Manage.Requests.RequestsViewModel;
 import com.ahaguru.teacherahaguru.databinding.FragmentTeachersBinding;
 
 import java.util.List;
@@ -31,7 +22,7 @@ import java.util.List;
 public class TeachersFragment extends Fragment {
 
     FragmentTeachersBinding binding;
-    TeacherViewModel teacherViewModel;
+    RequestsViewModel requestsViewModel;
     TeachersAdapter teachersAdapter;
 
     @Override
@@ -57,8 +48,8 @@ public class TeachersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
-        teacherViewModel.getAllApprovedTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
+        requestsViewModel = new ViewModelProvider(getActivity()).get(RequestsViewModel.class);
+        requestsViewModel.getAllApprovedTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
             @Override
             public void onChanged(List<Teachers> list) {
                 teachersAdapter.setTeachers(list);
