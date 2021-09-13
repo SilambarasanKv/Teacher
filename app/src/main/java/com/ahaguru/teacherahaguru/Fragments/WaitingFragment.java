@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
+import com.ahaguru.teacherahaguru.databinding.FragmentWaitingBinding;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,8 +26,7 @@ import org.jetbrains.annotations.NotNull;
 public class WaitingFragment extends Fragment {
 
     NavController navController;
-
-    Button buttonApproved, buttonRejected;
+    FragmentWaitingBinding binding;
 
     public WaitingFragment() {
         // Required empty public constructor
@@ -38,9 +38,7 @@ public class WaitingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_waiting, container, false);
-
-        buttonApproved = v.findViewById(R.id.btnApproved);
-        buttonRejected = v.findViewById(R.id.btnRejected);
+        binding = FragmentWaitingBinding.bind(v);
 
         return v;
 
@@ -52,7 +50,7 @@ public class WaitingFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-        buttonApproved.setOnClickListener(new View.OnClickListener() {
+        binding.btnApproved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -61,7 +59,7 @@ public class WaitingFragment extends Fragment {
             }
         });
 
-        buttonRejected.setOnClickListener(new View.OnClickListener() {
+        binding.btnRejected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -71,4 +69,11 @@ public class WaitingFragment extends Fragment {
         });
 
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
 }

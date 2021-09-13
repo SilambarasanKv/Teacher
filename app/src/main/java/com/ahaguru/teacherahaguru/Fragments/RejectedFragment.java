@@ -20,6 +20,7 @@ import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
+import com.ahaguru.teacherahaguru.databinding.FragmentRejectedBinding;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,8 +28,7 @@ import org.jetbrains.annotations.NotNull;
 public class RejectedFragment extends Fragment {
 
     NavController navController;
-
-    Button buttonStartAgain;
+    FragmentRejectedBinding binding;
 
     EditText name, phone, email;
 
@@ -41,12 +41,7 @@ public class RejectedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_rejected, container, false);
-
-        buttonStartAgain = v.findViewById(R.id.btnStartAgain);
-
-        name = v.findViewById(R.id.etFullName);
-        phone = v.findViewById(R.id.etPhoneNumber);
-        email = v.findViewById(R.id.etEmailAddress);
+        binding = FragmentRejectedBinding.bind(v);
 
 
         return v;
@@ -58,7 +53,7 @@ public class RejectedFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-        buttonStartAgain.setOnClickListener(new View.OnClickListener() {
+        binding.btnStartAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -67,5 +62,11 @@ public class RejectedFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

@@ -1,41 +1,26 @@
 package com.ahaguru.teacherahaguru.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
+
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.ahaguru.teacherahaguru.Entity.Teachers;
-import com.ahaguru.teacherahaguru.MainActivity;
-import com.ahaguru.teacherahaguru.AsteriskPassword.AsteriskPasswordTransformationMethod;
+
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
-import com.ahaguru.teacherahaguru.utils.ConstantData;
-import com.google.android.material.textfield.TextInputLayout;
+import com.ahaguru.teacherahaguru.databinding.FragmentCodeBinding;
 
 import org.jetbrains.annotations.NotNull;
 
 public class CodeFragment extends Fragment {
 
     NavController navController;
-    Button buttonSubmit;
-
-    TextInputLayout code;
-    Spinner spin;
+    FragmentCodeBinding binding;
 
     boolean isAllFieldsChecked = false;
 
@@ -48,9 +33,7 @@ public class CodeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_code, container, false);
-
-        buttonSubmit = v.findViewById(R.id.btnSubmit);
-        code = v.findViewById(R.id.etCode);
+        binding = FragmentCodeBinding.bind(v);
 
       //  code.setTransformationMethod(new AsteriskPasswordTransformationMethod());
 
@@ -64,7 +47,7 @@ public class CodeFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-        buttonSubmit.setOnClickListener(v -> {
+        binding.btnSubmit.setOnClickListener(v -> {
 
             isAllFieldsChecked = !validateCode();
 
@@ -80,17 +63,23 @@ public class CodeFragment extends Fragment {
 
     private boolean validateCode() {
 
-        String codeInput = code.getEditText().getText().toString();
+        String codeInput = binding.etCode.getEditText().getText().toString();
 
 
         if (!codeInput.isEmpty() && !(codeInput.length() < 8)) {
-            code.setError(null);
+            binding.etCode.setError(null);
             return true;
         } else {
-            code.setError("Enter the correct code");
+            binding.etCode.setError("Enter the correct code");
             return false;
         }
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

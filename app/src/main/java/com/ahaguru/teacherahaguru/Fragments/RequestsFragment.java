@@ -24,6 +24,8 @@ import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
+import com.ahaguru.teacherahaguru.databinding.FragmentRejectedBinding;
+import com.ahaguru.teacherahaguru.databinding.FragmentRequestsBinding;
 import com.ahaguru.teacherahaguru.utils.TeacherRequestListener;
 
 import java.util.ArrayList;
@@ -36,13 +38,10 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
     private List<Teachers> teachers = new ArrayList<>();
     TeacherViewModel teacherViewModel;
 
-
-    RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RequestsAdapter requestsAdapter;
+    FragmentRequestsBinding binding;
 
-    TextView tvNoPending;
-    Button btnInviteTeachers;
 
 
     //   List<TeacherViewModel> list = new ArrayList<>();
@@ -53,16 +52,13 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_requests, container, false);
+        binding = FragmentRequestsBinding.bind(v);
 
-        tvNoPending = v.findViewById(R.id.tvNoPending);
-        btnInviteTeachers = v.findViewById(R.id.btnInviteTeachers);
-
-        recyclerView = v.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerView.setHasFixedSize(true);
 
         requestsAdapter = new RequestsAdapter(this);
-        recyclerView.setAdapter(requestsAdapter);
+        binding.recyclerView.setAdapter(requestsAdapter);
 
         teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
         teacherViewModel.getAllPendingTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
@@ -74,7 +70,7 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
 
 
 
-        btnInviteTeachers.setOnClickListener(new View.OnClickListener() {
+        binding.btnInviteTeachers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -108,4 +104,9 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
         teacherViewModel.update(teacher);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

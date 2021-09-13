@@ -14,10 +14,11 @@ import androidx.fragment.app.Fragment;
 
 import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
+import com.ahaguru.teacherahaguru.databinding.FragmentApprovedBinding;
 
 public class ApprovedFragment extends Fragment {
 
-    Button buttonProceed;
+    FragmentApprovedBinding binding;
 
     public ApprovedFragment() {
         // Required empty public constructor
@@ -29,9 +30,15 @@ public class ApprovedFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_approved, container, false);
 
-        buttonProceed = v.findViewById(R.id.btnProceed);
+        binding = FragmentApprovedBinding.bind(v);
 
         return v;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

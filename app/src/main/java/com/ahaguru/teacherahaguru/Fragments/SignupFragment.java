@@ -23,6 +23,7 @@ import androidx.navigation.Navigation;
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
+import com.ahaguru.teacherahaguru.databinding.FragmentSignupBinding;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,16 +37,13 @@ public class SignupFragment extends Fragment {
 
     NavController navController;
     ArrayAdapter arrayAdapter;
+    FragmentSignupBinding binding;
+    TeacherViewModel teacherViewModel;
 
     public static final String EXTRA_NAME =
             "com.ahaguru.teacherahaguru.Fragments.EXTRA_NAME";
     public static final String EXTRA_EMAIL =
             "com.ahaguru.teacherahaguru.Fragments.EXTRA_EMAIL";
-
-    Button buttonNext;
-    TeacherViewModel teacherViewModel;
-    TextInputLayout name, phone, email, subject;
-    AutoCompleteTextView autoCompleteTextView;
 
     boolean isAllFieldsChecked = false;
 
@@ -87,21 +85,12 @@ public class SignupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_signup, container, false);
-
-        buttonNext = v.findViewById(R.id.btnNext);
-
-
-        name = v.findViewById(R.id.etFullName);
-        phone = v.findViewById(R.id.etPhoneNumber);
-        email = v.findViewById(R.id.etEmailAddress);
-        subject = v.findViewById(R.id.etSubject);
-
-        autoCompleteTextView = v.findViewById(R.id.autoCompleteTextView);
+        binding = FragmentSignupBinding.bind(v);
 
         String[] subjects;
         subjects = getResources().getStringArray(R.array.subjects);
         arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdown_item, subjects);
-        autoCompleteTextView.setAdapter(arrayAdapter);
+        binding.autoCompleteTextView.setAdapter(arrayAdapter);
 
         teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
 
@@ -116,16 +105,16 @@ public class SignupFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
 
-        buttonNext.setOnClickListener(v -> {
+        binding.btnNext.setOnClickListener(v -> {
 
             isAllFieldsChecked = !validateName() | !validatePhone() | !validateEmail() | !validateSubject();
 
             if (isAllFieldsChecked) {
                 return;
             } else {
-                String teacherName = name.getEditText().getText().toString();
-                String teacherPhone = phone.getEditText().getText().toString();
-                String teacherMail = email.getEditText().getText().toString();
+                String teacherName = binding.etFullName.getEditText().getText().toString();
+                String teacherPhone = binding.etPhoneNumber.getEditText().getText().toString();
+                String teacherMail = binding.etEmailAddress.getEditText().getText().toString();
 
                 Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, ConstantData.PENDING);
                 teacherViewModel.insert(teachers);
@@ -138,28 +127,28 @@ public class SignupFragment extends Fragment {
 
     private boolean validateName() {
 
-        String nameInput = name.getEditText().getText().toString();
+        String nameInput = binding.etFullName.getEditText().getText().toString();
 
 
         if (!nameInput.isEmpty()) {
-            name.setError(null);
+            binding.etFullName.setError(null);
             return true;
         }
         else {
-               name.setError("Enter your full name");
+               binding.etFullName.setError("Enter your full name");
                return false;
         }
     }
 
     private boolean validatePhone() {
-        String phoneInput = phone.getEditText().getText().toString();
+        String phoneInput = binding.etPhoneNumber.getEditText().getText().toString();
 
         if (!phoneInput.isEmpty() && !(phoneInput.length() < 10)) {
-            phone.setError(null);
+            binding.etPhoneNumber.setError(null);
             return true;
         }
         else {
-            phone.setError("Enter the correct phone number");
+            binding.etPhoneNumber.setError("Enter the correct phone number");
             return false;
         }
     }
@@ -167,14 +156,14 @@ public class SignupFragment extends Fragment {
 
     private boolean validateEmail() {
 
-        String emailInput = email.getEditText().getText().toString();
+        String emailInput = binding.etEmailAddress.getEditText().getText().toString();
 
 
         if (!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            email.setError(null);
+            binding.etEmailAddress.setError(null);
             return true;
         } else {
-            email.setError("Enter the valid email address");
+            binding.etEmailAddress.setError("Enter the valid email address");
             return false;
         }
 
@@ -182,17 +171,23 @@ public class SignupFragment extends Fragment {
 
     private boolean validateSubject() {
 
-        String subjectInput = subject.getEditText().getText().toString();
+        String subjectInput =  binding.etSubject.getEditText().getText().toString();
 
 
         if (!subjectInput.isEmpty()) {
-            subject.setError(null);
+            binding.etSubject.setError(null);
             return true;
         } else {
-            subject.setError("Select the subject");
+            binding.etSubject.setError("Select the subject");
             return false;
         }
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 

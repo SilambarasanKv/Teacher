@@ -1,5 +1,6 @@
 package com.ahaguru.teacherahaguru.Fragments;
 
+import android.hardware.ConsumerIrManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,16 +21,14 @@ import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.Room.TeacherRoomDatabase;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
+import com.ahaguru.teacherahaguru.databinding.FragmentTeachersBinding;
 
 import java.util.List;
 
 public class TeachersFragment extends Fragment {
 
-
+    FragmentTeachersBinding binding;
     TeacherViewModel teacherViewModel;
-
-
-    RecyclerView recyclerView;
     TeachersAdapter teachersAdapter;
 
     @Override
@@ -37,15 +36,15 @@ public class TeachersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_teachers, container, false);
+        binding = FragmentTeachersBinding.bind(v);
 
 
-        recyclerView = v.findViewById(R.id.teachersRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
+        binding.teachersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.teachersRecyclerView.setHasFixedSize(true);
 
         teachersAdapter = new TeachersAdapter();
-        recyclerView.setAdapter(teachersAdapter);
-        recyclerView.setItemAnimator(null);
+        binding.teachersRecyclerView.setAdapter(teachersAdapter);
+        binding.teachersRecyclerView.setItemAnimator(null);
 
         teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
         teacherViewModel.getAllApprovedTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
@@ -58,5 +57,10 @@ public class TeachersFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 
 }

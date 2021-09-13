@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
+import com.ahaguru.teacherahaguru.databinding.RequestsCardBinding;
 import com.ahaguru.teacherahaguru.utils.TeacherRequestListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +26,7 @@ import java.util.List;
 public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.MyViewHolder> {
     private List<Teachers> teachers = new ArrayList<>();
     TeacherRequestListener teacherRequestListener;
+    RequestsCardBinding binding;
 
     public RequestsAdapter(TeacherRequestListener teacherRequestListener) {
         this.teacherRequestListener = teacherRequestListener;
@@ -33,9 +35,9 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.MyView
     @NotNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.requests_card, parent, false);
-        return new MyViewHolder(itemView);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        RequestsCardBinding binding = RequestsCardBinding.inflate(layoutInflater, parent, false);
+        return new MyViewHolder(binding);
     }
 
     @Override
@@ -43,7 +45,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.MyView
         Teachers currentTeacher = teachers.get(position);
         holder.name.setText(currentTeacher.getName());
         holder.mail.setText(currentTeacher.getEmail());
-  //      holder.name.setText(currentTeachers.getName());
+        //      holder.name.setText(currentTeachers.getName());
 
         holder.approve.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,23 +79,25 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView name, mail, subject;
-        private Button approve, reject;
-        private CardView cardView;
+        TextView name, mail, subject;
+        Button approve, reject;
+        RequestsCardBinding binding;
 
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            name = itemView.findViewById(R.id.tvTeacherName);
-            mail = itemView.findViewById(R.id.tvTeacherMail);
-            subject = itemView.findViewById(R.id.tvTeacherSubject);
-            cardView = itemView.findViewById(R.id.cardView);
-            approve = itemView.findViewById(R.id.btnApprove);
-            reject = itemView.findViewById(R.id.btnReject);
+        public MyViewHolder(@NonNull RequestsCardBinding binding) {
+            super(binding.getRoot());
+
+            this.binding = binding;
+
+            name = binding.tvTeacherName;
+            mail = binding.tvTeacherMail;
+            subject = binding.tvTeacherSubject;
+            approve = binding.btnApprove;
+            reject = binding.btnReject;
 
         }
 
         public void bind(String text) {
-            name.setText(text);
+            binding.tvTeacherName.setText(text);
         }
 
     }

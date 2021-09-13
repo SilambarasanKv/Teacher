@@ -20,19 +20,16 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabTeachers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/teachers" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabRequests"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/requests" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabInvite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/invite" />

@@ -44,27 +44,4 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return numOfTabs;
     }
-
-//    @NonNull
-//    @NotNull
-//    @Override
-//    public Fragment createFragment(int position) {
-//        switch (position) {
-//
-//            case 0:
-//                return new TeachersFragment();
-//            case 1:
-//                return new RequestsFragment();
-//            case 2:
-//                return new InviteFragment();
-//            default:
-//                return null;
-//
-//        }
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return numOfTabs;
-//    }
 }

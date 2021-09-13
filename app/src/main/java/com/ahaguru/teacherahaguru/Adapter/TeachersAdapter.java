@@ -1,26 +1,21 @@
 package com.ahaguru.teacherahaguru.Adapter;
 
-import android.content.Context;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
+
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.Room.TeacherRoomDatabase;
-import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
-import com.ahaguru.teacherahaguru.utils.TeacherRequestListener;
+
+import com.ahaguru.teacherahaguru.databinding.TeachersRecyclerBinding;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,11 +32,9 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.MyView
     @NotNull
     @Override
     public TeachersAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.teachers_recycler, parent, false);
-
-
-        return new MyViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        TeachersRecyclerBinding binding = TeachersRecyclerBinding.inflate(layoutInflater, parent, false);
+        return new MyViewHolder(binding);
     }
 
     @Override
@@ -49,35 +42,29 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.MyView
         Teachers teacher = teachers.get(position);
         holder.teacherNameList.setText(teacher.getName());
 
-        holder.menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.menu.setOnClickListener(v -> {
 
-                popupMenu = new PopupMenu(v.getContext(), v);
-                popupMenu.inflate(R.menu.popup_menu);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
+            popupMenu = new PopupMenu(v.getContext(), v);
+            popupMenu.inflate(R.menu.popup_menu);
+            popupMenu.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
 
-                            case R.id.menu_suspend:
-                                return true;
+                    case R.id.menu_suspend:
+                        return true;
 
-                            case R.id.menu_delete:
-                                teachers.remove(position);
-                                notifyItemChanged(position);
-                                notifyItemRangeChanged(position, teachers.size());
+                    case R.id.menu_delete:
+                        teachers.remove(position);
+                        notifyItemChanged(position);
+                        notifyItemRangeChanged(position, teachers.size());
 
-                                return true;
+                        return true;
 
-                            default:
-                                return false;
+                    default:
+                        return false;
 
-                        }
-                    }
-                });
-                popupMenu.show();
-            }
+                }
+            });
+            popupMenu.show();
         });
     }
 
@@ -98,17 +85,23 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.MyView
     }
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private static final String TAG = "MyViewHolder";
-        private TextView teacherNameList;
-        private ImageView menu;
+        TeachersRecyclerBinding binding;
 
-        public MyViewHolder(View itemView) {
-            super(itemView);
+        TextView teacherNameList;
+        ImageView menu;
 
-            teacherNameList = itemView.findViewById(R.id.teacherNameList);
-            menu = itemView.findViewById(R.id.menu);
+        public MyViewHolder(@NonNull TeachersRecyclerBinding binding) {
+            super(binding.getRoot());
+
+            this.binding = binding;
+
+//            teacherNameList = itemView.findViewById(R.id.teacherNameList);
+//            menu = itemView.findViewById(R.id.menu);
+
+            teacherNameList = binding.teacherNameList;
+            menu = binding.menu;
 
         }
     }
