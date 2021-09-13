@@ -1,7 +1,12 @@
 package com.ahaguru.teacherahaguru.Fragments;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +16,11 @@ import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentTabbedBinding;
 import com.google.android.material.tabs.TabLayout;
 
-
 public class TabbedFragment extends Fragment {
 
     FragmentTabbedBinding binding;
     ViewPager2 viewPager;
     TabLayout tabLayout;
-    PagerAdapter pagerAdapter;
-
     public TabbedFragment() {
         // Required empty public constructor
     }
@@ -30,17 +32,19 @@ public class TabbedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tabbed, container, false);
         binding = FragmentTabbedBinding.bind(v);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         tabLayout = binding.tabLayout;
         viewPager = binding.viewPager;
 
         PagerAdapter pagerAdapter = new PagerAdapter(getParentFragment().getActivity(),
                 tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
-
-//        PagerAdapter pagerAdapter = new PagerAdapter(this.getParentFragmentManager(),
-//                tabLayout.getTabCount());
-//
-//        viewPager.setAdapter(pagerAdapter);
 
 
         // To change the tab views
@@ -81,8 +85,6 @@ public class TabbedFragment extends Fragment {
             }
         });
 
-
-        return v;
     }
 
     @Override

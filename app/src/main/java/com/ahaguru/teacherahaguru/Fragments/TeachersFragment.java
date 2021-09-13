@@ -10,9 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,6 +49,14 @@ public class TeachersFragment extends Fragment {
         binding.teachersRecyclerView.setAdapter(teachersAdapter);
         binding.teachersRecyclerView.setItemAnimator(null);
 
+
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
         teacherViewModel.getAllApprovedTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
             @Override
@@ -53,8 +64,6 @@ public class TeachersFragment extends Fragment {
                 teachersAdapter.setTeachers(list);
             }
         });
-
-        return v;
     }
 
     @Override

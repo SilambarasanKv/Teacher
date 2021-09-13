@@ -1,46 +1,37 @@
 package com.ahaguru.teacherahaguru.Fragments;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahaguru.teacherahaguru.Adapter.RequestsAdapter;
 
 import com.ahaguru.teacherahaguru.Entity.Teachers;
-import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.ViewModel.TeacherViewModel;
-import com.ahaguru.teacherahaguru.databinding.FragmentRejectedBinding;
 import com.ahaguru.teacherahaguru.databinding.FragmentRequestsBinding;
 import com.ahaguru.teacherahaguru.utils.TeacherRequestListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
-
 
 public class RequestsFragment extends Fragment implements TeacherRequestListener {
     private List<Teachers> teachers = new ArrayList<>();
     TeacherViewModel teacherViewModel;
-
-    RecyclerView.LayoutManager layoutManager;
     RequestsAdapter requestsAdapter;
     FragmentRequestsBinding binding;
+    NavController navController;
 
 
 
@@ -60,6 +51,13 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
         requestsAdapter = new RequestsAdapter(this);
         binding.recyclerView.setAdapter(requestsAdapter);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         teacherViewModel = new ViewModelProvider(getActivity()).get(TeacherViewModel.class);
         teacherViewModel.getAllPendingTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
             @Override
@@ -67,19 +65,6 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
                 requestsAdapter.setTeachers(list);
             }
         });
-
-
-
-        binding.btnInviteTeachers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
-
-        return v;
     }
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;

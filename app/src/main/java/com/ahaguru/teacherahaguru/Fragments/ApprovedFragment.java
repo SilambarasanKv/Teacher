@@ -1,24 +1,24 @@
 package com.ahaguru.teacherahaguru.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
-import com.ahaguru.teacherahaguru.MainActivity;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentApprovedBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 public class ApprovedFragment extends Fragment {
 
     FragmentApprovedBinding binding;
+    NavController navController;
 
     public ApprovedFragment() {
         // Required empty public constructor
@@ -33,6 +33,12 @@ public class ApprovedFragment extends Fragment {
         binding = FragmentApprovedBinding.bind(v);
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override

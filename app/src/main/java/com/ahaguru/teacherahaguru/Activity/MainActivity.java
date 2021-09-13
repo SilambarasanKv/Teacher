@@ -1,34 +1,23 @@
-package com.ahaguru.teacherahaguru;
+package com.ahaguru.teacherahaguru.Activity;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-
 import com.ahaguru.teacherahaguru.Adapter.PagerAdapter;
+import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.utils.FragmentStateSaver;
 import com.google.android.material.tabs.TabLayout;
-
-import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
     public FragmentStateSaver fragmentStateSaver;
     NavController navController;
     NavHostFragment navHostFragment;
-    public FragmentStateSaver getFragmentStateSaver() {
-        return fragmentStateSaver;
-    }
     ViewPager viewPager;
     TabLayout tabLayout;
-    PagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

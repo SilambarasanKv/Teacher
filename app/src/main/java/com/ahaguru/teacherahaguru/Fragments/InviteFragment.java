@@ -12,13 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentInviteBinding;
 
 public class InviteFragment extends Fragment {
+
     FragmentInviteBinding binding;
+    NavController navController;
+    ImageView copy, share;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,7 +33,18 @@ public class InviteFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_invite, container, false);
         binding = FragmentInviteBinding.bind(v);
 
-        binding.ivCopy.setOnClickListener(new View.OnClickListener() {
+
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        copy = binding.ivCopy;
+        share = binding.ivShare;
+
+        copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -41,7 +58,7 @@ public class InviteFragment extends Fragment {
             }
         });
 
-        binding.ivShare.setOnClickListener(new View.OnClickListener() {
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -55,8 +72,6 @@ public class InviteFragment extends Fragment {
 
             }
         });
-
-        return v;
     }
 
     @Override
