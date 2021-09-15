@@ -37,5 +37,4 @@ public class MainActivity extends AppCompatActivity {
         navController.navigateUp();
         return super.onSupportNavigateUp();
     }
-
 }

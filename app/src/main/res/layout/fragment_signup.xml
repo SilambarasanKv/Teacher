@@ -8,105 +8,146 @@
     android:layout_gravity="center"
     android:layout_margin="15dp">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etFullName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <TextView
+        android:id="@+id/tvFullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:text="Full Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etFullName"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tvFullName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/et_full_name"
+            android:background="@color/white"
             android:inputType="text"
-            android:maxLength="50" />
+            android:maxLength="30" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <TextView
+        android:id="@+id/tvPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toStartOf="@+id/etFullName"
+        android:text="Phone Number"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFullName">
+        app:layout_constraintTop_toBottomOf="@+id/etFullName" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber">
 
         <com.hbb20.CountryCodePicker
             android:id="@+id/ccp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etPhoneNumber"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:errorEnabled="true"
-            android:layout_toEndOf="@id/ccp"
+            android:layout_height="82dp"
             android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@id/ccp"
+            app:errorEnabled="true"
             tools:ignore="NotSibling">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/et_phone_number"
-                android:inputType="number"
-                android:maxLength="10" />
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:textSize="15dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/tvEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Email Address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEmailAddress"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="82dp"
-        android:layout_marginTop="15dp"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailAddress"
         tools:ignore="NotSibling">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/et_email_address"
+            android:background="@color/white"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etSubject"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+    <TextView
+        android:id="@+id/tvSubjects"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:text="Subjects"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailAddress">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailAddress" />
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextView"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubjects">
+
+        <TextView
+            android:id="@+id/tvSelectSubject"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="@string/tv_subjects"
-            android:inputType="none" />
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+            android:drawablePadding="16dp"
+            android:inputType="none"
+            android:padding="12dp"
+            android:layout_marginTop="-15dp"
+            android:layout_marginBottom="25dp"
+            android:text="Select Subject"
+            app:layout_constraintTop_toBottomOf="@+id/tvSubjects"
+            android:textSize="15dp" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -118,7 +159,6 @@
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:targetApi="lollipop" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

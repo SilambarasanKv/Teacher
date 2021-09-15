@@ -1,14 +1,19 @@
 package com.ahaguru.teacherahaguru.ui.Signup.Signup;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
+import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,19 +21,29 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.ui.Manage.Requests.RequestsViewModel;
 import com.ahaguru.teacherahaguru.databinding.FragmentSignupBinding;
+import com.ahaguru.teacherahaguru.ui.Manage.Requests.RequestsViewModel;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
+import com.google.android.material.textfield.TextInputLayout;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class SignupFragment extends Fragment {
 
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+
     NavController navController;
-    ArrayAdapter arrayAdapter;
     FragmentSignupBinding binding;
     RequestsViewModel requestsViewModel;
+
+    TextInputLayout fullName, emailAddress, phoneNumber, subject;
+    TextView selectSubject;
+    boolean[] selectedSubject;
+    ArrayList<Integer> subList = new ArrayList<>();
+    String[] subjects = {"English", "Chemistry", "Mathematics", "Biology"};
 
     public static final String EXTRA_NAME =
             "com.ahaguru.teacherahaguru.Fragments.EXTRA_NAME";
@@ -43,7 +58,6 @@ public class SignupFragment extends Fragment {
     public static final String EXTRA_REPLY = "com.com.ahaguru.teacherahaguru.teacherlistsql.REPLY";
 
     public SignupFragment() {
-
     }
 
     private static final String ARG_PARAM1 = "param1";
@@ -76,11 +90,17 @@ public class SignupFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_signup, container, false);
         binding = FragmentSignupBinding.bind(v);
+        binding.getRoot();
 
-        String[] subjects;
-        subjects = getResources().getStringArray(R.array.subjects);
-        arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdown_item, subjects);
-        binding.autoCompleteTextView.setAdapter(arrayAdapter);
+        fullName = binding.etFullName;
+        phoneNumber = binding.etPhoneNumber;
+        emailAddress = binding.etEmailAddress;
+        subject = binding.etSubject;
+        selectSubject = binding.tvSelectSubject;
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        editor = preferences.edit();
+        checkSharedPreferences();
 
         requestsViewModel = new ViewModelProvider(getActivity()).get(RequestsViewModel.class);
 
@@ -88,11 +108,79 @@ public class SignupFragment extends Fragment {
 
     }
 
+    private void checkSharedPreferences() {
+        String mName = preferences.getString(getString(R.string.mName), "");
+        String mPhone = preferences.getString(getString(R.string.mPhone), "");
+        String mEmail = preferences.getString(getString(R.string.mEmail), "");
+        String mSubject = preferences.getString(getString(R.string.mSubject), "");
+
+        fullName.getEditText().setText(mName);
+        phoneNumber.getEditText().setText(mPhone);
+        emailAddress.getEditText().setText(mEmail);
+        selectSubject.setText(mSubject);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+
+        selectedSubject = new boolean[subjects.length];
+
+        selectSubject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Select Subjects");
+                builder.setCancelable(false);
+
+                builder.setMultiChoiceItems(subjects, selectedSubject, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        if (b) {
+                            subList.add(i);
+                            Collections.sort(subList);
+                        } else {
+                            subList.remove(i);
+                        }
+                    }
+                });
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int j = 0; j < subList.size(); j++) {
+                            stringBuilder.append(subjects[subList.get(j)]);
+                            if (j != subList.size() - 1) {
+                                stringBuilder.append(", ");
+                            }
+                        }
+                        selectSubject.setText(stringBuilder.toString());
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        for (int j = 0; j < selectedSubject.length; j++) {
+                            selectedSubject[j] = false;
+                            subList.clear();
+                            selectSubject.setText("");
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
 
 
         binding.btnNext.setOnClickListener(v -> {
@@ -102,9 +190,9 @@ public class SignupFragment extends Fragment {
             if (isAllFieldsChecked) {
                 return;
             } else {
-                String teacherName = binding.etFullName.getEditText().getText().toString();
-                String teacherPhone = binding.etPhoneNumber.getEditText().getText().toString();
-                String teacherMail = binding.etEmailAddress.getEditText().getText().toString();
+                String teacherName = fullName.getEditText().getText().toString();
+                String teacherPhone = phoneNumber.getEditText().getText().toString();
+                String teacherMail = emailAddress.getEditText().getText().toString();
 
                 Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, ConstantData.PENDING);
                 requestsViewModel.insert(teachers);
@@ -112,33 +200,111 @@ public class SignupFragment extends Fragment {
                 navController.navigate(R.id.action_signupFragment_to_codeFragment);
             }
 
+            // To save name
+            String mName = fullName.getEditText().getText().toString();
+            editor.putString(getString(R.string.mName), mName);
+            editor.commit();
+
+            // To save phone number
+            String mPhone = phoneNumber.getEditText().getText().toString();
+            editor.putString(getString(R.string.mPhone), mPhone);
+            editor.commit();
+
+            // To save email address
+            String mEmail = emailAddress.getEditText().getText().toString();
+            editor.putString(getString(R.string.mEmail), mEmail);
+            editor.commit();
+
+            // To save subject
+            String mSubject = selectSubject.getText().toString();
+            editor.putString(getString(R.string.mSubject), mSubject);
+            editor.commit();
+
+
         });
-    }
+
+        edtListenerValidation();
+
+     }
+
+     private void edtListenerValidation(){
+         fullName.getEditText().addTextChangedListener(new TextWatcher() {
+
+             @Override
+             public void afterTextChanged(Editable s) {}
+
+             @Override
+             public void beforeTextChanged(CharSequence s, int start,
+                                           int count, int after) {
+             }
+
+             @Override
+             public void onTextChanged(CharSequence s, int start,
+                                       int before, int count) {
+                 validateName();
+             }
+         });
+
+         phoneNumber.getEditText().addTextChangedListener(new TextWatcher() {
+
+             @Override
+             public void afterTextChanged(Editable s) {}
+
+             @Override
+             public void beforeTextChanged(CharSequence s, int start,
+                                           int count, int after) {
+             }
+
+             @Override
+             public void onTextChanged(CharSequence s, int start,
+                                       int before, int count) {
+                 validatePhone();
+             }
+         });
+
+         emailAddress.getEditText().addTextChangedListener(new TextWatcher() {
+
+             @Override
+             public void afterTextChanged(Editable s) {}
+
+             @Override
+             public void beforeTextChanged(CharSequence s, int start,
+                                           int count, int after) {
+             }
+
+             @Override
+             public void onTextChanged(CharSequence s, int start,
+                                       int before, int count) {
+                 validateEmail();
+             }
+         });
+
+     }
 
     private boolean validateName() {
 
-        String nameInput = binding.etFullName.getEditText().getText().toString();
+        String nameInput = fullName.getEditText().getText().toString();
 
 
         if (!nameInput.isEmpty()) {
-            binding.etFullName.setError(null);
+            fullName.setError(null);
             return true;
         }
         else {
-               binding.etFullName.setError("Enter your full name");
-               return false;
+            fullName.setError("Enter your full name");
+            return false;
         }
     }
 
     private boolean validatePhone() {
-        String phoneInput = binding.etPhoneNumber.getEditText().getText().toString();
+        String phoneInput = phoneNumber.getEditText().getText().toString();
 
-        if (!phoneInput.isEmpty() && !(phoneInput.length() < 10)) {
-            binding.etPhoneNumber.setError(null);
+        if (!phoneInput.isEmpty() && (phoneInput.length() > 5) && (phoneInput.length() <= 10)) {
+            phoneNumber.setError(null);
             return true;
         }
         else {
-            binding.etPhoneNumber.setError("Enter the correct phone number");
+            phoneNumber.setError("Enter the correct phone number");
             return false;
         }
     }
@@ -146,14 +312,14 @@ public class SignupFragment extends Fragment {
 
     private boolean validateEmail() {
 
-        String emailInput = binding.etEmailAddress.getEditText().getText().toString();
+        String emailInput = emailAddress.getEditText().getText().toString();
 
 
         if (!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            binding.etEmailAddress.setError(null);
+            emailAddress.setError(null);
             return true;
         } else {
-            binding.etEmailAddress.setError("Enter the valid email address");
+            emailAddress.setError("Enter the valid email address");
             return false;
         }
 
@@ -161,14 +327,14 @@ public class SignupFragment extends Fragment {
 
     private boolean validateSubject() {
 
-        String subjectInput =  binding.etSubject.getEditText().getText().toString();
+        String subjectInput =  selectSubject.getText().toString();
 
 
         if (!subjectInput.isEmpty()) {
-            binding.etSubject.setError(null);
+            subject.setError(null);
             return true;
         } else {
-            binding.etSubject.setError("Select the subject");
+            subject.setError("Select the subject");
             return false;
         }
 
