@@ -128,25 +128,24 @@
         android:id="@+id/etSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         app:errorEnabled="true"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSubjects">
 
-        <TextView
-            android:id="@+id/tvSelectSubject"
+        <MultiAutoCompleteTextView
+            android:id="@+id/multiAutoComplete"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:lines="1"
             android:background="@color/white"
-            android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
-            android:drawablePadding="16dp"
             android:inputType="none"
-            android:padding="12dp"
-            android:layout_marginTop="-15dp"
-            android:layout_marginBottom="25dp"
-            android:text="Select Subject"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubjects"
-            android:textSize="15dp" />
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:padding="15dp"
+            android:text="Select Subject" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
