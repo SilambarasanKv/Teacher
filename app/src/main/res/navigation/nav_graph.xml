@@ -51,8 +51,8 @@
         android:name="com.ahaguru.teacherahaguru.ui.Signup.Reject.RejectedFragment"
         android:label="RejectedFragment" >
         <action
-            android:id="@+id/action_rejectedFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            android:id="@+id/action_rejectedFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/tabbedFragment"

@@ -1,5 +1,6 @@
 package com.ahaguru.teacherahaguru.ui.Signup.Reject;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class RejectedFragment extends Fragment {
     NavController navController;
     FragmentRejectedBinding binding;
     SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     EditText name, phone, email;
 
@@ -38,7 +40,7 @@ public class RejectedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_rejected, container, false);
         binding = FragmentRejectedBinding.bind(v);
 
-
+        preferences = getActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
 
         return v;
     }
@@ -53,9 +55,12 @@ public class RejectedFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                navController.navigate(R.id.action_rejectedFragment_to_signupFragment);
+                editor = preferences.edit();
+                editor.clear();
+                editor.apply();
 
 
+                navController.navigate(R.id.action_rejectedFragment_to_mainFragment);
 
             }
         });

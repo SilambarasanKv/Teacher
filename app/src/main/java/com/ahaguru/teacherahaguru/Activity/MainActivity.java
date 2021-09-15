@@ -1,5 +1,7 @@
 package com.ahaguru.teacherahaguru.Activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     NavHostFragment navHostFragment;
     ViewPager viewPager;
     TabLayout tabLayout;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +34,24 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController);
 
+        preferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
+
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         navController.navigateUp();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+
     }
 }

@@ -2,6 +2,7 @@ package com.ahaguru.teacherahaguru.ui.Signup.Signup;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -99,6 +100,7 @@ public class SignupFragment extends Fragment {
         selectSubject = binding.tvSelectSubject;
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        preferences = getActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
         editor = preferences.edit();
         checkSharedPreferences();
 
