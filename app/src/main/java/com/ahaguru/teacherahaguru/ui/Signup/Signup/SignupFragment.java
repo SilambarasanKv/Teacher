@@ -106,6 +106,7 @@ public class SignupFragment extends Fragment {
         adapter = new ArrayAdapter(requireContext(), R.layout.dropdown_item, selectSub);
 
         multiAutoCompleteTextView.setAdapter(adapter);
+        multiAutoCompleteTextView.setKeyListener(null);
         multiAutoCompleteTextView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
