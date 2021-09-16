@@ -142,7 +142,7 @@ public class SignupFragment extends Fragment {
                             Collections.sort(subList);
                         } else {
                             subList.remove(i);
-                        }
+                            }
                     }
                 });
 

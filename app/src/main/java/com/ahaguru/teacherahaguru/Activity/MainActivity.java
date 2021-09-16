@@ -1,5 +1,6 @@
 package com.ahaguru.teacherahaguru.Activity;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController);
+
+        getSupportActionBar().setElevation(0f);
 
         preferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
     }
