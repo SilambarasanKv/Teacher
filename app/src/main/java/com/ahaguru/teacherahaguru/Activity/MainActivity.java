@@ -3,6 +3,8 @@ package com.ahaguru.teacherahaguru.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -35,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController);
 
         preferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
-
     }
 
     @Override

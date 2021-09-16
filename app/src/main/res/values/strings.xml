@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TeacherAhaguru</string>
+    <string name="app_name">Teacher</string>
     <string name="mName">com.ahaguru.teacherahaguru.ui.Signup.Signup.name</string>
     <string name="mPhone">com.ahaguru.teacherahaguru.ui.Signup.Signup.phone</string>
     <string name="mEmail">com.ahaguru.teacherahaguru.ui.Signup.Signup.email</string>
@@ -24,6 +24,7 @@
     <string name="et_email_address">Enter Your Email Address</string>
     <string name="tv_subjects">Subjects</string>
     <string name="next">Next</string>
+    <string name="select_subjects">Select Subjects</string>
 
     <string name="tv_teacher_code">Teacher Code</string>
     <string name="enter_the_teacher_code_shared_by_school">Please enter the teacher code shared by your school</string>

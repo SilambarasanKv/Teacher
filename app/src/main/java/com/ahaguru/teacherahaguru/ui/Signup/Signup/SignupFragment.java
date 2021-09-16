@@ -8,18 +8,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
-import android.text.InputType;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.MultiAutoCompleteTextView;
-import android.widget.TextView;
+import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -41,25 +40,15 @@ public class SignupFragment extends Fragment {
     NavController navController;
     FragmentSignupBinding binding;
     RequestsViewModel requestsViewModel;
-    MultiAutoCompleteTextView multiAutoCompleteTextView;
     ArrayAdapter adapter;
 
     TextInputLayout fullName, emailAddress, phoneNumber, subject;
+    EditText selectSubject;
     boolean[] selectedSubject;
     ArrayList<Integer> subList = new ArrayList<>();
-    String[] selectSub = {"English", "Chemistry", "Mathematics", "Biology"};
-
-    public static final String EXTRA_NAME =
-            "com.ahaguru.teacherahaguru.Fragments.EXTRA_NAME";
-    public static final String EXTRA_EMAIL =
-            "com.ahaguru.teacherahaguru.Fragments.EXTRA_EMAIL";
+    String[] selectSub = {"Office Admin", "Principal", "Coordinator", "Physics", "Chemistry", "Biology", "Science", "Maths", "English", "Social Studies"};
 
     boolean isAllFieldsChecked = false;
-
-    private String bundleFullname;
-    private final String bundleFullnameVAL = "bundleFullnameVAL";
-
-    public static final String EXTRA_REPLY = "com.com.ahaguru.teacherahaguru.teacherlistsql.REPLY";
 
     public SignupFragment() {
     }
@@ -95,19 +84,16 @@ public class SignupFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_signup, container, false);
         binding = FragmentSignupBinding.bind(v);
         binding.getRoot();
-
+        // TextInputLayout
         fullName = binding.etFullName;
         phoneNumber = binding.etPhoneNumber;
         emailAddress = binding.etEmailAddress;
-        subject = binding.etSubject;
+        subject = binding.tilSubject;
+        // EditText
+        selectSubject = binding.etSubject;
 
-        multiAutoCompleteTextView = binding.multiAutoComplete;
 
         adapter = new ArrayAdapter(requireContext(), R.layout.dropdown_item, selectSub);
-
-        multiAutoCompleteTextView.setAdapter(adapter);
-        multiAutoCompleteTextView.setKeyListener(null);
-        multiAutoCompleteTextView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         preferences = getActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
@@ -129,7 +115,7 @@ public class SignupFragment extends Fragment {
         fullName.getEditText().setText(mName);
         phoneNumber.getEditText().setText(mPhone);
         emailAddress.getEditText().setText(mEmail);
-        subject.getEditText().setText(mSubject);
+        selectSubject.setText(mSubject);
     }
 
     @Override
@@ -139,6 +125,60 @@ public class SignupFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         selectedSubject = new boolean[selectSub.length];
+
+        selectSubject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Select Subjects");
+                builder.setCancelable(false);
+
+                builder.setMultiChoiceItems(selectSub, selectedSubject, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        if (b) {
+                            subList.add(i);
+                            Collections.sort(subList);
+                        } else {
+                            subList.remove(i);
+                        }
+                    }
+                });
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int j = 0; j < subList.size(); j++) {
+                            stringBuilder.append(selectSub[subList.get(j)]);
+                            if (j != subList.size() - 1) {
+                                stringBuilder.append(", ");
+                            }
+                        }
+                        selectSubject.setText(stringBuilder.toString());
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        for (int j = 0; j < selectedSubject.length; j++) {
+                            selectedSubject[j] = false;
+                            subList.clear();
+                            selectSubject.setText("");
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
 
         binding.btnNext.setOnClickListener(v -> {
 
@@ -173,7 +213,7 @@ public class SignupFragment extends Fragment {
             editor.commit();
 
             // To save subject
-            String mSubject = subject.getEditText().getText().toString();
+            String mSubject = selectSubject.getText().toString();
             editor.putString(getString(R.string.mSubject), mSubject);
             editor.commit();
 
@@ -284,7 +324,7 @@ public class SignupFragment extends Fragment {
 
     private boolean validateSubject() {
 
-        String subjectInput =  subject.getEditText().getText().toString();
+        String subjectInput =  selectSubject.getText().toString();
 
 
         if (!subjectInput.isEmpty()) {

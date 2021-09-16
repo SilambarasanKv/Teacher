@@ -17,7 +17,7 @@
         android:layout_marginTop="30dp"
         android:text="@string/tv_teacher_code"
         android:textColor="@color/red"
-        android:textSize="23sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
         android:layout_below="@id/tvTeacherCode"
         android:layout_marginTop="25dp"
         android:text="@string/enter_the_teacher_code_shared_by_school"
-        android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTeacherCode" />
 
@@ -54,14 +54,14 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#2196F3"
+        android:backgroundTint="@color/button"
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />

@@ -7,64 +7,63 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/ivOops"
+        android:layout_width="60sp"
+        android:layout_height="70sp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/oops"
+        app:layout_constraintBottom_toTopOf="@+id/tvOops"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/oops" />
+
+    <TextView
+        android:id="@+id/tvOops"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/oops"
+        android:textColor="@color/red"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintBottom_toTopOf="@+id/btnStartAgain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvReqDenied"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvOops"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="@string/req_denied"
+        android:textColor="@color/black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvOops" />
 
-        <ImageView
-            android:id="@+id/ivOops"
-            android:layout_width="60sp"
-            android:layout_height="70sp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/oops" />
+    <TextView
+        android:id="@+id/tvTryAgain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvReqDenied"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/try_again"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvReqDenied" />
 
-        <TextView
-            android:id="@+id/tvOops"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/oops"
-            android:textColor="@color/red"
-            android:textSize="25sp"
-            android:layout_below="@id/ivOops"
-            android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:id="@+id/tvReqDenied"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:text="@string/req_denied"
-            android:textColor="@color/black"
-            android:textSize="17sp"
-            android:layout_below="@id/tvOops" />
-
-        <TextView
-            android:id="@+id/tvTryAgain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvReqDenied"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/try_again"
-            android:textSize="17sp" />
-
-    </RelativeLayout>
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnStartAgain"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#2196F3"
+        android:backgroundTint="@color/button"
         android:text="@string/start_again"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
