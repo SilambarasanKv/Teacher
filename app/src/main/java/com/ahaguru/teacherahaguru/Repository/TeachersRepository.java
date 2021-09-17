@@ -8,22 +8,22 @@ import androidx.lifecycle.LiveData;
 import com.ahaguru.teacherahaguru.Dao.TeacherDao;
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.Room.TeacherRoomDatabase;
+import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 public class TeachersRepository {
 
     private TeacherDao teacherDao;
-    private LiveData<List<Teachers>> allTeachers;
-    private LiveData<List<Teachers>> allTeachers2;
+//    private LiveData<List<Teachers>> allTeachers;
+//    private LiveData<List<Teachers>> allTeachers2;
 
     public TeachersRepository(Application application) {
 
         TeacherRoomDatabase teacherRoomDatabase = TeacherRoomDatabase.getInstance(application);
         teacherDao = teacherRoomDatabase.teacherDao();
-
-        allTeachers = teacherDao.getAllPendingTeachers();
-        allTeachers2 = teacherDao.getAllApprovedTeachers();
 
     }
 
@@ -44,11 +44,11 @@ public class TeachersRepository {
 //    }
 
     public LiveData<List<Teachers>> getAllPendingTeachers() {
-        return allTeachers;
+        return teacherDao.getAllPendingTeachers(ConstantData.REQUESTED);
     }
 
     public LiveData<List<Teachers>> getAllApprovedTeachers() {
-        return allTeachers2;
+        return teacherDao.getAllApprovedTeachers(ConstantData.APPROVED);
     }
 
     private static class InsertTeacherAsyncTask extends AsyncTask<Teachers, Void, Void> {
@@ -111,23 +111,4 @@ public class TeachersRepository {
 
     }
 
-//    private static class DeleteAllTeacherAsyncTask extends AsyncTask<Void, Void, Void> {
-//
-//        private TeacherDao teacherDao;
-//
-//        private DeleteAllTeacherAsyncTask(TeacherDao teacherDao) {
-//
-//            this.teacherDao = teacherDao;
-//
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//
-//            teacherDao.deleteAllTeachers();
-//
-//            return null;
-//        }
-//
-//    }
 }

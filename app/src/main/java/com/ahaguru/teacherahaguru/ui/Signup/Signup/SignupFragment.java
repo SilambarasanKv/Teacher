@@ -92,6 +92,8 @@ public class SignupFragment extends Fragment {
         // EditText
         selectSubject = binding.etSubject;
 
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Teacher");
+
 
         adapter = new ArrayAdapter(requireContext(), R.layout.dropdown_item, selectSub);
 
@@ -191,7 +193,7 @@ public class SignupFragment extends Fragment {
                 String teacherPhone = phoneNumber.getEditText().getText().toString();
                 String teacherMail = emailAddress.getEditText().getText().toString();
 
-                Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, ConstantData.PENDING);
+                Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, ConstantData.REQUESTED);
                 requestsViewModel.insert(teachers);
 
                 navController.navigate(R.id.action_signupFragment_to_codeFragment);

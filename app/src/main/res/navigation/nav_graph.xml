@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.ahaguru.teacherahaguru.ui.Main.MainFragment"
-        android:label="MainFragment" >
+        android:label="Teacher" >
         <action
             android:id="@+id/action_mainFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.ahaguru.teacherahaguru.ui.Signup.Signup.SignupFragment"
-        android:label="SignupFragment" >
+        android:label="Teacher" >
         <action
             android:id="@+id/action_signupFragment_to_codeFragment"
             app:destination="@id/codeFragment" />
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/codeFragment"
         android:name="com.ahaguru.teacherahaguru.ui.Signup.Code.CodeFragment"
-        android:label="CodeFragment" >
+        android:label="Teacher" >
         <action
             android:id="@+id/action_codeFragment_to_waitingFragment"
             app:destination="@id/waitingFragment" />
@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/waitingFragment"
         android:name="com.ahaguru.teacherahaguru.ui.Signup.Waiting.WaitingFragment"
-        android:label="WaitingFragment" >
+        android:label="Teacher" >
         <action
             android:id="@+id/action_waitingFragment_to_approvedFragment"
             app:destination="@id/approvedFragment" />
@@ -45,11 +45,11 @@
     <fragment
         android:id="@+id/approvedFragment"
         android:name="com.ahaguru.teacherahaguru.ui.Signup.Approve.ApprovedFragment"
-        android:label="ApprovedFragment" />
+        android:label="Teacher" />
     <fragment
         android:id="@+id/rejectedFragment"
         android:name="com.ahaguru.teacherahaguru.ui.Signup.Reject.RejectedFragment"
-        android:label="RejectedFragment" >
+        android:label="Teacher" >
         <action
             android:id="@+id/action_rejectedFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -57,5 +57,5 @@
     <fragment
         android:id="@+id/tabbedFragment"
         android:name="com.ahaguru.teacherahaguru.ui.Manage.Tabbed.TabbedFragment"
-        android:label="TabbedFragment" />
+        android:label="Teacher" />
 </navigation>

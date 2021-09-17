@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentRequestsBinding;
+import com.ahaguru.teacherahaguru.utils.ConstantData;
 import com.ahaguru.teacherahaguru.utils.TeacherRequestListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,11 +63,11 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
         });
     }
 
-    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+//    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     public void onApprove(Teachers teacher) {
-        teacher.setStatus(1);
+        teacher.setStatus(ConstantData.APPROVED);
         requestsViewModel.update(teacher);
 
         requestsViewModel.getAllPendingTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
@@ -81,7 +81,7 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
 
     @Override
     public void onReject(Teachers teacher) {
-        teacher.setStatus(2);
+        teacher.setStatus(ConstantData.REJECTED);
         requestsViewModel.update(teacher);
     }
 

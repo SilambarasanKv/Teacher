@@ -20,10 +20,10 @@ public class Teachers {
 
 //    private String subject;
 
-    private int status;
+    private String status;
 
 
-    public Teachers(String name, String phone_number, String email, int status) {
+    public Teachers(String name, String phone_number, String email, String status) {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
@@ -57,11 +57,11 @@ public class Teachers {
 //        this.subject = subject;
 //    }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 

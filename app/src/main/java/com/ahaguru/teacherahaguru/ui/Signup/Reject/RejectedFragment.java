@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -39,6 +40,8 @@ public class RejectedFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_rejected, container, false);
         binding = FragmentRejectedBinding.bind(v);
+
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Teacher");
 
         preferences = getActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
 
