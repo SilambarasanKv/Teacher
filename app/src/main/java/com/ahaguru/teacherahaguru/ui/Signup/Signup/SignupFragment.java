@@ -147,7 +147,7 @@ public class SignupFragment extends Fragment {
                             subList.add(i);
                             Collections.sort(subList);
                         } else {
-                            subList.remove(i);
+                            subList.remove(Integer.valueOf(i));
                             }
                     }
                 });
