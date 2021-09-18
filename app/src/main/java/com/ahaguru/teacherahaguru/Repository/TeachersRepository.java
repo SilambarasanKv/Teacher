@@ -11,6 +11,8 @@ import com.ahaguru.teacherahaguru.Room.TeacherRoomDatabase;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static java.lang.Integer.parseInt;
 
@@ -28,15 +30,23 @@ public class TeachersRepository {
     }
 
     public void insert(Teachers teachers) {
-        new InsertTeacherAsyncTask(teacherDao).execute(teachers);
+   //     new InsertTeacherExecutor(teacherDao).execute(teachers);
+
+        TeacherRoomDatabase.executorService.execute(() -> {
+            teacherDao.insert(teachers);
+        });
     }
 
     public void update(Teachers teachers) {
-        new UpdateTeacherAsyncTask(teacherDao).execute(teachers);
+        TeacherRoomDatabase.executorService.execute(() -> {
+            teacherDao.update(teachers);
+        });
     }
 
     public void delete(Teachers teachers) {
-        new DeleteTeacherAsyncTask(teacherDao).execute(teachers);
+        TeacherRoomDatabase.executorService.execute(() -> {
+            teacherDao.delete(teachers);
+        });
     }
 
 //    public void deleteAllTeachers(Teachers teachers) {
@@ -51,64 +61,64 @@ public class TeachersRepository {
         return teacherDao.getAllApprovedTeachers(ConstantData.APPROVED);
     }
 
-    private static class InsertTeacherAsyncTask extends AsyncTask<Teachers, Void, Void> {
-
-        private TeacherDao teacherDao;
-
-        private InsertTeacherAsyncTask(TeacherDao teacherDao) {
-
-            this.teacherDao = teacherDao;
-
-        }
-
-        @Override
-        protected Void doInBackground(Teachers... teachers) {
-
-            teacherDao.insert(teachers[0]);
-
-            return null;
-        }
-
-    }
-
-    private static class UpdateTeacherAsyncTask extends AsyncTask<Teachers, Void, Void> {
-
-        private TeacherDao teacherDao;
-
-        private UpdateTeacherAsyncTask(TeacherDao teacherDao) {
-
-            this.teacherDao = teacherDao;
-
-        }
-
-        @Override
-        protected Void doInBackground(Teachers... teachers) {
-
-            teacherDao.update(teachers[0]);
-
-            return null;
-        }
-
-    }
-
-    private static class DeleteTeacherAsyncTask extends AsyncTask<Teachers, Void, Void> {
-
-        private TeacherDao teacherDao;
-
-        private DeleteTeacherAsyncTask(TeacherDao teacherDao) {
-
-            this.teacherDao = teacherDao;
-
-        }
-
-        @Override
-        protected Void doInBackground(Teachers... teachers) {
-
-            teacherDao.delete(teachers[0]);
-
-            return null;
-        }
-
-    }
+//    private static class InsertTeacherExecutor extends AsyncTask<Teachers, Void, Void>  {
+//
+//        private TeacherDao teacherDao;
+//
+//        private InsertTeacherExecutor(TeacherDao teacherDao) {
+//
+//            this.teacherDao = teacherDao;
+//
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Teachers... teachers) {
+//
+//            teacherDao.insert(teachers[0]);
+//
+//            return null;
+//        }
+//
+//    }
+//
+//    private static class UpdateTeacherExecutor extends AsyncTask<Teachers, Void, Void> {
+//
+//        private TeacherDao teacherDao;
+//
+//        private UpdateTeacherExecutor(TeacherDao teacherDao) {
+//
+//            this.teacherDao = teacherDao;
+//
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Teachers... teachers) {
+//
+//            teacherDao.update(teachers[0]);
+//
+//            return null;
+//        }
+//
+//    }
+//
+//    private static class DeleteTeacherExecutor extends AsyncTask<Teachers, Void, Void> {
+//
+//        private TeacherDao teacherDao;
+//
+//        private DeleteTeacherExecutor(TeacherDao teacherDao) {
+//
+//            this.teacherDao = teacherDao;
+//
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Teachers... teachers) {
+//
+//            teacherDao.delete(teachers[0]);
+//
+//            return null;
+//        }
+//
+//    }
 
 }
