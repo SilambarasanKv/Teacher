@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,8 +42,9 @@ public class SignupFragment extends Fragment {
     FragmentSignupBinding binding;
     RequestsViewModel requestsViewModel;
     ArrayAdapter adapter;
+    CheckBox checkBox;
 
-    TextInputLayout fullName, emailAddress, phoneNumber, subject;
+    TextInputLayout fullName, emailAddress, phoneNumber, subject, contactEmail;
     EditText selectSubject;
     boolean[] selectedSubject;
     ArrayList<Integer> subList = new ArrayList<>();
@@ -89,8 +91,10 @@ public class SignupFragment extends Fragment {
         phoneNumber = binding.etPhoneNumber;
         emailAddress = binding.etEmailAddress;
         subject = binding.tilSubject;
+        contactEmail = binding.etContactEmail;
         // EditText
         selectSubject = binding.etSubject;
+        checkBox = binding.checkbox;
 
 //        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Teacher");
 
@@ -184,7 +188,7 @@ public class SignupFragment extends Fragment {
 
         binding.btnNext.setOnClickListener(v -> {
 
-            isAllFieldsChecked = !validateName() | !validatePhone() | !validateEmail() | !validateSubject();
+            isAllFieldsChecked = !validateName() | !validatePhone() | !validateEmail() | !validateSubject() | validateContactEmail();
 
             if (isAllFieldsChecked) {
                 return;
@@ -223,6 +227,16 @@ public class SignupFragment extends Fragment {
         });
 
         edtListenerValidation();
+
+        checkBox.setOnClickListener(v -> {
+
+            Boolean isChecked = true;
+
+           if (isChecked) {
+               contactEmail.setError(null);
+           }
+
+        });
 
      }
 
@@ -278,6 +292,24 @@ public class SignupFragment extends Fragment {
              }
          });
 
+         contactEmail.getEditText().addTextChangedListener(new TextWatcher() {
+
+             @Override
+             public void afterTextChanged(Editable s) {}
+
+             @Override
+             public void beforeTextChanged(CharSequence s, int start,
+                                           int count, int after) {
+             }
+
+             @Override
+             public void onTextChanged(CharSequence s, int start,
+                                       int before, int count) {
+
+                 validateContactEmail();
+             }
+         });
+
      }
 
     private boolean validateName() {
@@ -319,6 +351,21 @@ public class SignupFragment extends Fragment {
             return true;
         } else {
             emailAddress.setError("Enter the valid email address");
+            return false;
+        }
+
+    }
+
+    private boolean validateContactEmail() {
+
+        String contactEmailInput =  contactEmail.getEditText().getText().toString();
+
+
+        if (!contactEmailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(contactEmailInput).matches()) {
+            contactEmail.setError(null);
+            return true;
+        } else {
+            contactEmail.setError("Enter the contact email address");
             return false;
         }
 
