@@ -14,9 +14,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.AsteriskPassword.AsteriskPasswordTransformationMethod;
+import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentCodeBinding;
 import com.ahaguru.teacherahaguru.ui.Signup.Signup.SignupViewModel;
+import com.ahaguru.teacherahaguru.utils.ConstantData;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -63,23 +65,26 @@ public class CodeFragment extends Fragment {
 
         binding.btnSubmit.setOnClickListener(v -> {
 
+            String name = CodeFragmentArgs.fromBundle(getArguments()).getName();
+            String phone = CodeFragmentArgs.fromBundle(getArguments()).getPhone();
+            String email = CodeFragmentArgs.fromBundle(getArguments()).getEmail();
+            String contactEmail = CodeFragmentArgs.fromBundle(getArguments()).getContactEmail();
+            String subject = CodeFragmentArgs.fromBundle(getArguments()).getSubjects();
+
             isAllFieldsChecked = !validateCode();
 
             if (isAllFieldsChecked) {
                 return;
             }
             else {
+
+                Teachers teachers = new Teachers(name, phone, email, contactEmail, subject, ConstantData.REQUESTED);
+                codeViewModel.insert(teachers);
+
                 navController.navigate(R.id.action_codeFragment_to_waitingFragment);
             }
 
         });
-
-        String name = CodeFragmentArgs.fromBundle(getArguments()).getName();
-        String phone = CodeFragmentArgs.fromBundle(getArguments()).getPhone();
-        String email = CodeFragmentArgs.fromBundle(getArguments()).getEmail();
-        String contactEmail = CodeFragmentArgs.fromBundle(getArguments()).getContactEmail();
-        String subject = CodeFragmentArgs.fromBundle(getArguments()).getSubjects();
-
 
     }
 

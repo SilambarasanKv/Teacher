@@ -199,9 +199,6 @@ public class SignupFragment extends Fragment {
                 String teacherContactMail = contactEmail.getEditText().getText().toString();
                 String teacherSubject = selectSubject.getText().toString();
 
-                Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, teacherContactMail, teacherSubject, ConstantData.REQUESTED);
-                signupViewModel.insert(teachers);
-
                 SignupFragmentDirections.ActionSignupFragmentToCodeFragment action = SignupFragmentDirections.actionSignupFragmentToCodeFragment(teacherName, teacherPhone, teacherMail, teacherContactMail, teacherSubject);
 
 
