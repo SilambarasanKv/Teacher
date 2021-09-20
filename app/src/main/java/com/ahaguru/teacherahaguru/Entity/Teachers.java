@@ -14,20 +14,23 @@ public class Teachers {
 
     private String name;
 
-    private String email;
-
     private String phone_number;
 
-//    private String subject;
+    private String email;
+
+    private String contactEmail;
+
+    private String subject;
 
     private String status;
 
 
-    public Teachers(String name, String phone_number, String email, String status) {
+    public Teachers(String name, String phone_number, String email, String contactEmail, String subject, String status) {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
-//        this.subject = subject;
+        this.contactEmail = contactEmail;
+        this.subject = subject;
         this.status = status;
     }
 
@@ -45,17 +48,12 @@ public class Teachers {
         return phone_number;
     }
 
-// //   public String getSubject() {
-//        return subject;
-//    }
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 
-// //   public void setSubject(String subject) {
-//        this.subject = subject;
-//    }
+
 
     public void setStatus(String status) {
         this.status = status;
@@ -85,32 +83,21 @@ public class Teachers {
         this.email = email;
     }
 
-    //    public Teachers(@NonNull String teachers) {this.name = teachers;}
-//
-//    public String getTeachers(){return this.name;}
-
-//    @ColumnInfo(name = "teacher_email")
-//    private String email;
-//
-/*    @NonNull
-    public String getName() {
-        return name;
+    public String getContactEmail() {
+        return contactEmail;
     }
 
-    public void setName(@NonNull String name) {
-        this.name = name;
-    }*/
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
 
-    /*public Teachers(@NonNull String teachers) {this.mTeachers = teachers;}
+    public String getSubject() {
+        return subject;
+    }
 
-    public String getTeachers(){return this.mTeachers;}*/
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
 }
 

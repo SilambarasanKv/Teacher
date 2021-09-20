@@ -36,6 +36,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.MyView
         Teachers currentTeacher = teachers.get(position);
         holder.name.setText(currentTeacher.getName());
         holder.mail.setText(currentTeacher.getEmail());
+        holder.subject.setText(currentTeacher.getSubject());
         //      holder.name.setText(currentTeachers.getName());
 
         holder.approve.setOnClickListener(new View.OnClickListener() {

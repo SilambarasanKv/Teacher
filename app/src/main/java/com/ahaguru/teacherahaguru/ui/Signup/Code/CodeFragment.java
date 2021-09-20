@@ -9,12 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-
+import com.ahaguru.teacherahaguru.AsteriskPassword.AsteriskPasswordTransformationMethod;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentCodeBinding;
+import com.ahaguru.teacherahaguru.ui.Signup.Signup.SignupViewModel;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,8 +26,11 @@ public class CodeFragment extends Fragment {
 
     NavController navController;
     FragmentCodeBinding binding;
-
+    CodeViewModel codeViewModel;
     boolean isAllFieldsChecked = false;
+
+    TextInputLayout code;
+
 
     public CodeFragment() {
 
@@ -36,9 +43,13 @@ public class CodeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_code, container, false);
         binding = FragmentCodeBinding.bind(v);
 
-      //  code.setTransformationMethod(new AsteriskPasswordTransformationMethod());
+        code = binding.etCode;
+
+        code.getEditText().setTransformationMethod(new AsteriskPasswordTransformationMethod());
 
 //        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Teacher");
+
+        codeViewModel = new ViewModelProvider(getActivity()).get(CodeViewModel.class);
 
 
         return v;
@@ -62,6 +73,14 @@ public class CodeFragment extends Fragment {
             }
 
         });
+
+        String name = CodeFragmentArgs.fromBundle(getArguments()).getName();
+        String phone = CodeFragmentArgs.fromBundle(getArguments()).getPhone();
+        String email = CodeFragmentArgs.fromBundle(getArguments()).getEmail();
+        String contactEmail = CodeFragmentArgs.fromBundle(getArguments()).getContactEmail();
+        String subject = CodeFragmentArgs.fromBundle(getArguments()).getSubjects();
+
+
     }
 
     private boolean validateCode() {
@@ -70,10 +89,10 @@ public class CodeFragment extends Fragment {
 
 
         if (!codeInput.isEmpty() && !(codeInput.length() < 8)) {
-            binding.etCode.setError(null);
+            code.setError(null);
             return true;
         } else {
-            binding.etCode.setError("Enter the correct code");
+            code.setError("Enter the correct code");
             return false;
         }
 

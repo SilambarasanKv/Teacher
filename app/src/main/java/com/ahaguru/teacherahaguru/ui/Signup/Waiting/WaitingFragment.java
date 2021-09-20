@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentWaitingBinding;
+import com.ahaguru.teacherahaguru.ui.Signup.Signup.SignupViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +24,7 @@ public class WaitingFragment extends Fragment {
 
     NavController navController;
     FragmentWaitingBinding binding;
+    WaitingViewModel waitingViewModel;
 
     public WaitingFragment() {
         // Required empty public constructor
@@ -36,6 +39,9 @@ public class WaitingFragment extends Fragment {
         binding = FragmentWaitingBinding.bind(v);
 
 //        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Teacher");
+
+        waitingViewModel = new ViewModelProvider(getActivity()).get(WaitingViewModel.class);
+
 
         return v;
 

@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-@Database(entities = {Teachers.class}, version = 3, exportSchema = false)
+@Database(entities = {Teachers.class}, version = 4, exportSchema = false)
 public abstract class TeacherRoomDatabase extends RoomDatabase {
 
     private static TeacherRoomDatabase instance;

@@ -40,7 +40,7 @@ public class SignupFragment extends Fragment {
 
     NavController navController;
     FragmentSignupBinding binding;
-    RequestsViewModel requestsViewModel;
+    SignupViewModel signupViewModel;
     ArrayAdapter adapter;
     CheckBox checkBox;
 
@@ -106,7 +106,7 @@ public class SignupFragment extends Fragment {
         editor = preferences.edit();
         checkSharedPreferences();
 
-        requestsViewModel = new ViewModelProvider(getActivity()).get(RequestsViewModel.class);
+        signupViewModel = new ViewModelProvider(getActivity()).get(SignupViewModel.class);
 
         return v;
 
@@ -196,11 +196,16 @@ public class SignupFragment extends Fragment {
                 String teacherName = fullName.getEditText().getText().toString();
                 String teacherPhone = phoneNumber.getEditText().getText().toString();
                 String teacherMail = emailAddress.getEditText().getText().toString();
+                String teacherContactMail = contactEmail.getEditText().getText().toString();
+                String teacherSubject = selectSubject.getText().toString();
 
-                Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, ConstantData.REQUESTED);
-                requestsViewModel.insert(teachers);
+                Teachers teachers = new Teachers(teacherName,teacherPhone, teacherMail, teacherContactMail, teacherSubject, ConstantData.REQUESTED);
+                signupViewModel.insert(teachers);
 
-                navController.navigate(R.id.action_signupFragment_to_codeFragment);
+                SignupFragmentDirections.ActionSignupFragmentToCodeFragment action = SignupFragmentDirections.actionSignupFragmentToCodeFragment(teacherName, teacherPhone, teacherMail, teacherContactMail, teacherSubject);
+
+
+                navController.navigate(action);
             }
 
             // To save name
@@ -216,6 +221,11 @@ public class SignupFragment extends Fragment {
             // To save email address
             String mEmail = emailAddress.getEditText().getText().toString();
             editor.putString(getString(R.string.mEmail), mEmail);
+            editor.commit();
+
+            // To save email address
+            String mContactEmail = contactEmail.getEditText().getText().toString();
+            editor.putString(getString(R.string.mContactEmail), mContactEmail);
             editor.commit();
 
             // To save subject

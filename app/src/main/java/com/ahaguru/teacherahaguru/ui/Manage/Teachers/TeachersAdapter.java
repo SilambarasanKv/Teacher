@@ -16,6 +16,7 @@ import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 
 import com.ahaguru.teacherahaguru.databinding.TeachersRecyclerBinding;
+import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +26,7 @@ import java.util.List;
 public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.MyViewHolder> implements PopupMenu.OnMenuItemClickListener {
 
     private List<Teachers> teachers = new ArrayList<>();
+    TeachersFragment teachersFragment;
 
 
     PopupMenu popupMenu;
@@ -105,4 +107,5 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.MyView
 
         }
     }
+
 }

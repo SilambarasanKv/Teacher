@@ -3,6 +3,7 @@
     <string name="mName">com.ahaguru.teacherahaguru.ui.Signup.Signup.name</string>
     <string name="mPhone">com.ahaguru.teacherahaguru.ui.Signup.Signup.phone</string>
     <string name="mEmail">com.ahaguru.teacherahaguru.ui.Signup.Signup.email</string>
+    <string name="mContactEmail">com.ahaguru.teacherahaguru.ui.Signup.Signup.contactEmail</string>
     <string name="mSubject">com.ahaguru.teacherahaguru.ui.Signup.Signup.subject</string>
     <!-- TODO: Remove or change this placeholder text -->
 

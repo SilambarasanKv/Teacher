@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -27,6 +28,7 @@ public class RejectedFragment extends Fragment {
     FragmentRejectedBinding binding;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    RejectedViewModel rejectedViewModel;
 
     EditText name, phone, email;
 
@@ -41,9 +43,9 @@ public class RejectedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_rejected, container, false);
         binding = FragmentRejectedBinding.bind(v);
 
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Teacher");
-
         preferences = getActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
+
+        rejectedViewModel = new ViewModelProvider(getActivity()).get(RejectedViewModel.class);
 
         return v;
     }

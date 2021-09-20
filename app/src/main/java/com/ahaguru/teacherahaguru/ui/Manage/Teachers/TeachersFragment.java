@@ -2,6 +2,8 @@ package com.ahaguru.teacherahaguru.ui.Manage.Teachers;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,14 +18,16 @@ import com.ahaguru.teacherahaguru.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.ui.Manage.Requests.RequestsViewModel;
 import com.ahaguru.teacherahaguru.databinding.FragmentTeachersBinding;
+import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 import java.util.List;
 
 public class TeachersFragment extends Fragment {
 
     FragmentTeachersBinding binding;
-    RequestsViewModel requestsViewModel;
+    TeachersViewModel teachersViewModel;
     TeachersAdapter teachersAdapter;
+    Menu delete, suspend;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,7 +35,6 @@ public class TeachersFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_teachers, container, false);
         binding = FragmentTeachersBinding.bind(v);
-
 
         binding.teachersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.teachersRecyclerView.setHasFixedSize(true);
@@ -48,8 +51,9 @@ public class TeachersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        requestsViewModel = new ViewModelProvider(getActivity()).get(RequestsViewModel.class);
-        requestsViewModel.getAllApprovedTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
+        teachersViewModel = new ViewModelProvider(getActivity()).get(TeachersViewModel.class);
+
+        teachersViewModel.getAllApprovedTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
             @Override
             public void onChanged(List<Teachers> list) {
                 teachersAdapter.setTeachers(list);
@@ -57,10 +61,15 @@ public class TeachersFragment extends Fragment {
         });
     }
 
+    public void onDelete(Teachers teacher) {
+        teachersViewModel.delete(teacher);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
+
 
 }

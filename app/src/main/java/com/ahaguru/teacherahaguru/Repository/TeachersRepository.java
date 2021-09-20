@@ -1,8 +1,6 @@
 package com.ahaguru.teacherahaguru.Repository;
 
 import android.app.Application;
-import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
 
 import com.ahaguru.teacherahaguru.Dao.TeacherDao;
@@ -11,10 +9,6 @@ import com.ahaguru.teacherahaguru.Room.TeacherRoomDatabase;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import static java.lang.Integer.parseInt;
 
 public class TeachersRepository {
 
