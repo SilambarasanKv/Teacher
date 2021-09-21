@@ -100,7 +100,6 @@ public class CodeFragment extends Fragment {
             code.setError("Enter the correct code");
             return false;
         }
-
     }
 
     @Override
