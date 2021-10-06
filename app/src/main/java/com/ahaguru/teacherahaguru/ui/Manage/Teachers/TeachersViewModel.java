@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.ahaguru.teacherahaguru.Entity.Teachers;
-import com.ahaguru.teacherahaguru.Repository.TeachersRepository;
+import com.ahaguru.teacherahaguru.data.Entity.Teachers;
+import com.ahaguru.teacherahaguru.data.Repository.TeachersRepository;
 
 import org.jetbrains.annotations.NotNull;
 

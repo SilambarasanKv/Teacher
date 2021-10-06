@@ -22,10 +22,17 @@ public class ApprovedFragment extends Fragment {
 
     FragmentApprovedBinding binding;
     NavController navController;
-    AndroidViewModel androidViewModel;
+    ApprovedViewModel androidViewModel;
 
     public ApprovedFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        androidViewModel = new ViewModelProvider(this).get(ApprovedViewModel.class);
     }
 
     @Override
@@ -34,8 +41,6 @@ public class ApprovedFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_approved, container, false);
         binding = FragmentApprovedBinding.bind(v);
-
-        androidViewModel = new ViewModelProvider(getActivity()).get(ApprovedViewModel.class);
 
         return v;
     }

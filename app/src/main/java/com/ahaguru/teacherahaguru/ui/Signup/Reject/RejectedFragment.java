@@ -37,6 +37,13 @@ public class RejectedFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        rejectedViewModel = new ViewModelProvider(this).get(RejectedViewModel.class);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -44,8 +51,6 @@ public class RejectedFragment extends Fragment {
         binding = FragmentRejectedBinding.bind(v);
 
         preferences = getActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
-
-        rejectedViewModel = new ViewModelProvider(getActivity()).get(RejectedViewModel.class);
 
         return v;
     }

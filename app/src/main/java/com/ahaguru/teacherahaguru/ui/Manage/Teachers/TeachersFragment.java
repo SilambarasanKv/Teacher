@@ -3,7 +3,6 @@ package com.ahaguru.teacherahaguru.ui.Manage.Teachers;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,11 +13,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.ahaguru.teacherahaguru.Entity.Teachers;
+import com.ahaguru.teacherahaguru.data.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.ui.Manage.Requests.RequestsViewModel;
 import com.ahaguru.teacherahaguru.databinding.FragmentTeachersBinding;
-import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 import java.util.List;
 

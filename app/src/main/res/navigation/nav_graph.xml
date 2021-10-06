@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_signupFragment_to_codeFragment"
             app:destination="@id/codeFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/codeFragment"
@@ -43,8 +46,11 @@
             android:name="contactEmail"
             app:argType="string" />
         <argument
-            android:name="subjects"
+            android:name="teacherRegistrationSubject"
             app:argType="string" />
+        <action
+            android:id="@+id/action_codeFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
     </fragment>
     <fragment
         android:id="@+id/waitingFragment"

@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.ahaguru.teacherahaguru.Entity.Teachers;
+import com.ahaguru.teacherahaguru.data.Entity.Teachers;
 import com.ahaguru.teacherahaguru.databinding.RequestsCardBinding;
 import com.ahaguru.teacherahaguru.utils.TeacherRequestListener;
 import org.jetbrains.annotations.NotNull;
@@ -36,8 +36,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.MyView
         Teachers currentTeacher = teachers.get(position);
         holder.name.setText(currentTeacher.getName());
         holder.mail.setText(currentTeacher.getEmail());
-        holder.subject.setText(currentTeacher.getSubject());
-        //      holder.name.setText(currentTeachers.getName());
+//        holder.subject.setText(currentTeacher.getTeacher_registration_subject());
 
         holder.approve.setOnClickListener(new View.OnClickListener() {
             @Override

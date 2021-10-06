@@ -1,4 +1,4 @@
-package com.ahaguru.teacherahaguru.Dao;
+package com.ahaguru.teacherahaguru.data.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,7 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-import com.ahaguru.teacherahaguru.Entity.Teachers;
+import com.ahaguru.teacherahaguru.data.Entity.Teachers;
 
 import java.util.List;
 
@@ -28,9 +28,9 @@ public interface TeacherDao {
 //    @Query("DELETE FROM teacher_table")
 //    void deleteAllteachers();
 
-    @Query("SELECT * FROM teacher_table where status= :status")
+    @Query("SELECT * FROM teacher_table where teacher_status= :status")
     LiveData<List<Teachers>> getAllPendingTeachers(String status);
 
-    @Query("SELECT * FROM teacher_table where status= :status")
+    @Query("SELECT * FROM teacher_table where teacher_status= :status")
     LiveData<List<Teachers>> getAllApprovedTeachers(String status);
 }

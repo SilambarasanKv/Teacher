@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.ahaguru.teacherahaguru.Entity.Teachers;
+import com.ahaguru.teacherahaguru.data.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 import com.ahaguru.teacherahaguru.databinding.FragmentRequestsBinding;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
@@ -67,7 +67,7 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
 
     @Override
     public void onApprove(Teachers teacher) {
-        teacher.setStatus(ConstantData.APPROVED);
+        teacher.setTeacher_status(ConstantData.APPROVED);
         requestsViewModel.update(teacher);
 
         requestsViewModel.getAllPendingTeachers().observe(getViewLifecycleOwner(), new Observer<List<Teachers>>() {
@@ -81,7 +81,7 @@ public class RequestsFragment extends Fragment implements TeacherRequestListener
 
     @Override
     public void onReject(Teachers teacher) {
-        teacher.setStatus(ConstantData.REJECTED);
+        teacher.setTeacher_status(ConstantData.REJECTED);
         requestsViewModel.update(teacher);
     }
 

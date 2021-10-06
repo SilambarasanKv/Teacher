@@ -2,15 +2,11 @@ package com.ahaguru.teacherahaguru.ui.Signup.Signup;
 
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,7 +15,6 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,66 +23,97 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.ahaguru.teacherahaguru.data.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
-import com.ahaguru.teacherahaguru.SubjectsApi.Interface.RetrofitService;
-import com.ahaguru.teacherahaguru.SubjectsApi.Model.Subjects;
-import com.ahaguru.teacherahaguru.SubjectsApi.Retrofit.RetrofitClient;
+import com.ahaguru.teacherahaguru.data.SubjectsApi.ErrorHandling.ApiStatusResponse;
+import com.ahaguru.teacherahaguru.data.SubjectsApi.ErrorHandling.Resource;
 import com.ahaguru.teacherahaguru.databinding.FragmentSignupBinding;
+import com.ahaguru.teacherahaguru.utils.ConstantData;
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 public class SignupFragment extends Fragment {
 
-    private static final String TAG = "SignupFragment";
+    Teachers teachers;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     NavController navController;
     FragmentSignupBinding binding;
     SignupViewModel signupViewModel;
-    ArrayAdapter adapter;
     CheckBox checkBox;
-
-    RetrofitService mService;
-
     TextInputLayout fullName, emailAddress, phoneNumber, subject, contactEmail;
     EditText selectSubject;
     TextView sameasabove, textInfo;
     boolean[] selectedSubject;
     ArrayList<Integer> subList = new ArrayList<>();
-//    String[] selectSub = {"Office Admin", "Principal", "Coordinator", "Physics", "Chemistry", "Biology", "Science", "Maths", "English", "Social Studies"};
-
     boolean isAllFieldsChecked = false;
 
     public SignupFragment() {
     }
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
-
-
-    public static SignupFragment newInstance(String param1, String param2) {
-        SignupFragment fragment = new SignupFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        signupViewModel = new ViewModelProvider(this).get(SignupViewModel.class);
+
+        signupViewModel.getSubjectsList().observe(this, new Observer<Resource<ApiStatusResponse>>() {
+            @Override
+            public void onChanged(Resource<ApiStatusResponse> apiStatusResponseResource) {
+
+                handleRegisterSubjectsApiResponse(apiStatusResponseResource);
+
+
+            }
+        });
+
+    }
+
+    private void handleRegisterSubjectsApiResponse(Resource<ApiStatusResponse> apiStatusResponseResource) {
+
+        if (apiStatusResponseResource == null) {
+            return;
         }
+
+        switch (apiStatusResponseResource.status) {
+
+            case SUCCESS:
+                ApiStatusResponse apiStatusResponse = apiStatusResponseResource.data;
+
+                if (apiStatusResponse.getStatus() == ConstantData.STATUS_CODE_SUCESS) {
+
+
+                }
+                else {
+                    Log.e("registerSubjects", apiStatusResponse.getMessage());
+                }
+                break;
+
+            case ERROR:
+
+                apiStatusResponse = apiStatusResponseResource.data;
+
+                if (apiStatusResponse.getStatus() == ConstantData.STATUS_CODE_TOKEN_MISMATCH) {
+
+                    navController.navigate(R.id.action_signupFragment_to_mainFragment);
+
+                    Toast.makeText(requireContext(), "", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else {
+                    Log.e("registerSubjects", apiStatusResponse.getMessage());
+                }
+
+
+        }
+
     }
 
     @Override
@@ -107,43 +133,13 @@ public class SignupFragment extends Fragment {
         selectSubject = binding.etSubject;
         checkBox = binding.checkbox;
         sameasabove = binding.tvSameAsAbove;
-        textInfo = binding.textInfo;
-
-//        adapter = new ArrayAdapter(requireContext(), R.layout.dropdown_item, selectSub);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         preferences = getActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
         editor = preferences.edit();
         checkSharedPreferences();
 
-        signupViewModel = new ViewModelProvider(getActivity()).get(SignupViewModel.class);
-
-        getSubjects();
-
         return v;
-
-    }
-
-    private void getSubjects() {
-
-        RetrofitService service = RetrofitClient.getRetrofitInstance().create(RetrofitService.class);
-        Call<Subjects> call = service.getSubjectsList();
-
-        call.enqueue(new Callback<Subjects>() {
-
-
-            @Override
-            public void onResponse(Call<Subjects> call, Response<Subjects> response) {
-
-                Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Call<Subjects> call, Throwable t) {
-                Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 
@@ -165,62 +161,6 @@ public class SignupFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-//        selectedSubject = new boolean[selectSub.length];
-//
-//        selectSubject.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                builder.setTitle("Select Subjects");
-//                builder.setCancelable(false);
-//
-//                builder.setMultiChoiceItems(selectSub, selectedSubject, new DialogInterface.OnMultiChoiceClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                        if (b) {
-//                            subList.add(i);
-//                            Collections.sort(subList);
-//                        } else {
-//                            subList.remove(Integer.valueOf(i));
-//                            }
-//                    }
-//                });
-//
-//                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        StringBuilder stringBuilder = new StringBuilder();
-//                        for (int j = 0; j < subList.size(); j++) {
-//                            stringBuilder.append(selectSub[subList.get(j)]);
-//                            if (j != subList.size() - 1) {
-//                                stringBuilder.append(", ");
-//                            }
-//                        }
-//                        selectSubject.setText(stringBuilder.toString());
-//                    }
-//                });
-//
-//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        dialogInterface.dismiss();
-//                    }
-//                });
-//                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        for (int j = 0; j < selectedSubject.length; j++) {
-//                            selectedSubject[j] = false;
-//                            subList.clear();
-//                            selectSubject.setText("");
-//                        }
-//                    }
-//                });
-//                builder.show();
-//            }
-//        });
-
         binding.btnNext.setOnClickListener(v -> {
 
             isAllFieldsChecked = !validateName() | !validatePhone() | !validateEmail() | !validateSubject() | validateContactEmail();
@@ -235,7 +175,6 @@ public class SignupFragment extends Fragment {
                 String teacherSubject = selectSubject.getText().toString();
 
                 SignupFragmentDirections.ActionSignupFragmentToCodeFragment action = SignupFragmentDirections.actionSignupFragmentToCodeFragment(teacherName, teacherPhone, teacherMail, teacherContactMail, teacherSubject);
-
 
                 navController.navigate(action);
             }

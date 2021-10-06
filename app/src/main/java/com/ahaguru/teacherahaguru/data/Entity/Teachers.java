@@ -1,44 +1,36 @@
-package com.ahaguru.teacherahaguru.Entity;
+package com.ahaguru.teacherahaguru.data.Entity;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.ahaguru.teacherahaguru.data.Model.TeacherRegistrationSubject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(tableName = "teacher_table")
 public class Teachers {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private String name;
-
     private String phone_number;
-
     private String email;
-
     private String contactEmail;
-
-    private String subject;
-
-    private String status;
+    private String teacher_status;
+//    private TeacherRegistrationSubject teacherRegistrationSubject;
 
 
-    public Teachers(String name, String phone_number, String email, String contactEmail, String subject, String status) {
+    public Teachers(String name, String phone_number, String email, String contactEmail, String teacher_status) {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
         this.contactEmail = contactEmail;
-        this.subject = subject;
-        this.status = status;
+        this.teacher_status = teacher_status;
+//        this.teacherRegistrationSubject = teacherRegistrationSubject;
     }
-
-
-//    public Teachers(int id) {
-//        this.id = id;
-//    }
-
 
     public void setId(int id) {
         this.id = id;
@@ -51,16 +43,6 @@ public class Teachers {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
-    }
-
-
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     public int getId() {
@@ -91,13 +73,19 @@ public class Teachers {
         this.contactEmail = contactEmail;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getTeacher_status() {
+        return teacher_status;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setTeacher_status(String teacher_status) {
+        this.teacher_status = teacher_status;
     }
-
+    //    public TeacherRegistrationSubject getTeacherRegistrationSubject() {
+//        return teacherRegistrationSubject;
+//    }
+//
+//    public void setTeacherRegistrationSubject(TeacherRegistrationSubject teacherRegistrationSubject) {
+//        this.teacherRegistrationSubject = teacherRegistrationSubject;
+//    }
 }
 

@@ -12,11 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ahaguru.teacherahaguru.Entity.Teachers;
+import com.ahaguru.teacherahaguru.data.Entity.Teachers;
 import com.ahaguru.teacherahaguru.R;
 
 import com.ahaguru.teacherahaguru.databinding.TeachersRecyclerBinding;
-import com.ahaguru.teacherahaguru.utils.ConstantData;
 
 import org.jetbrains.annotations.NotNull;
 
