@@ -53,6 +53,7 @@ public class SignupFragment extends Fragment {
     boolean[] selectedSubject;
     ArrayList<Integer> subList = new ArrayList<>();
     boolean isAllFieldsChecked = false;
+    String[] selectSub = {"Office Admin", "Principal", "Coordinator", "Physics", "Chemistry", "Biology", "Science", "Maths", "English", "Social Studies"};
 
     public SignupFragment() {
     }
@@ -160,6 +161,50 @@ public class SignupFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+
+        selectedSubject = new boolean[selectSub.length];
+
+        selectSubject.setOnClickListener(v1 -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Select Subjects");
+            builder.setCancelable(false);
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int j = 0; j < subList.size(); j++) {
+                            stringBuilder.append(selectSub[subList.get(j)]);
+                        if (j != subList.size() - 1) {
+                            stringBuilder.append(", ");
+                        }
+                    }
+                    selectSubject.setText(stringBuilder.toString());
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    for (int j = 0; j < selectedSubject.length; j++) {
+                        selectedSubject[j] = false;
+                        subList.clear();
+                        selectSubject.setText("");
+                    }
+                }
+            });
+
+            builder.show();
+
+        });
 
         binding.btnNext.setOnClickListener(v -> {
 
