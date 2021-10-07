@@ -36,6 +36,7 @@ import com.ahaguru.teacherahaguru.databinding.FragmentSignupBinding;
 import com.ahaguru.teacherahaguru.utils.ConstantData;
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SignupFragment extends Fragment {
@@ -169,6 +170,18 @@ public class SignupFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("Select Subjects");
             builder.setCancelable(false);
+
+            builder.setMultiChoiceItems(selectSub, selectedSubject, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                    if (b) {
+                        subList.add(i);
+                        Collections.sort(subList);
+                    } else {
+                        subList.remove(Integer.valueOf(i));
+                    }
+                }
+            });
 
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override

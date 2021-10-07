@@ -71,35 +71,35 @@ public class TeachersRepository {
         return teacherDao.getAllApprovedTeachers(ConstantData.APPROVED);
     }
 
-    public void insertLists(final Teachers lists) {
+    public void insertLists(final Teachers teachers) {
 
         teacherRoomDatabase.executorService.execute(new Runnable() {
             @Override
             public void run() {
 
-                teacherRoomDatabase.teacherDao().insert(lists);
+                teacherRoomDatabase.teacherDao().insert(teachers);
             }
         });
     }
 
-    public void updateLists(final Teachers lists) {
+    public void updateLists(final Teachers teachers) {
 
         teacherRoomDatabase.executorService.execute(new Runnable() {
             @Override
             public void run() {
 
-                teacherRoomDatabase.teacherDao().update(lists);
+                teacherRoomDatabase.teacherDao().update(teachers);
             }
         });
     }
 
-    public void deleteLists(final Teachers lists) {
+    public void deleteLists(final Teachers teachers) {
 
         teacherRoomDatabase.executorService.execute(new Runnable() {
             @Override
             public void run() {
 
-                teacherRoomDatabase.teacherDao().delete(lists);
+                teacherRoomDatabase.teacherDao().delete(teachers);
             }
         });
     }
@@ -114,37 +114,37 @@ public class TeachersRepository {
             @Override
             public void onResponse(Call<TeacherRegistrationSubject> call, Response<TeacherRegistrationSubject> response) {
 
-                if (response.body() == null) {
-                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(response.code(), response.message())));
-                }
-
-                TeacherRegistrationSubject teacherRegistrationSub = response.body();
-
-                if (teacherRegistrationSub.getStatus() == ConstantData.STATUS_CODE_SUCESS) {
-
-                    apiStatusResponse.postValue(Resource.success(new ApiStatusResponse(teacherRegistrationSubject.getStatus(), teacherRegistrationSubject.getMessage())));
-
-                }
-
-                else if (teacherRegistrationSub.getStatus() == ConstantData.STATUS_CODE_TOKEN_MISMATCH) {
-
-
-
-                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(teacherRegistrationSub.getStatus(), teacherRegistrationSub.getMessage())));
-
-                }
-
-                else {
-
-                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(teacherRegistrationSub.getStatus(), teacherRegistrationSub.getMessage())));
-                }
+//                if (response.body() == null) {
+//                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(response.code(), response.message())));
+//                }
+//
+//                TeacherRegistrationSubject teacherRegistrationSub = response.body();
+//
+//                if (teacherRegistrationSub.getStatus() == ConstantData.STATUS_CODE_SUCESS) {
+//
+//                    apiStatusResponse.postValue(Resource.success(new ApiStatusResponse(teacherRegistrationSubject.getStatus(), teacherRegistrationSubject.getMessage())));
+//
+//                }
+//
+//                else if (teacherRegistrationSub.getStatus() == ConstantData.STATUS_CODE_TOKEN_MISMATCH) {
+//
+//
+//
+//                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(teacherRegistrationSub.getStatus(), teacherRegistrationSub.getMessage())));
+//
+//                }
+//
+//                else {
+//
+//                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(teacherRegistrationSub.getStatus(), teacherRegistrationSub.getMessage())));
+//                }
 
             }
 
             @Override
             public void onFailure(Call<TeacherRegistrationSubject> call, Throwable t) {
 
-                apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(-1, t.getMessage())));
+//                apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(-1, t.getMessage())));
             }
         });
 
@@ -158,7 +158,7 @@ public class TeachersRepository {
 
         // check network
 
-        isInternetAvailable(context);
+//        isInternetAvailable(context);
 
 
         Call<RegisterProfileOutput> call =  RegisterProfileClient.getInstance().inputService().getInputList();
@@ -168,42 +168,42 @@ public class TeachersRepository {
             @Override
             public void onResponse(Call<RegisterProfileOutput> call, Response<RegisterProfileOutput> response) {
 
-                if (response.body() == null) {
-                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(response.code(), response.message())));
-                }
-
-                RegisterProfileOutput registerProfileOutput = response.body();
-
-                if (registerProfileOutput.getStatus() == ConstantData.STATUS_CODE_SUCESS) {
-
-                    // add to db
-
-                    teacherRoomDatabase.teacherDao().insert(teacher);
-
-                    apiStatusResponse.postValue(Resource.success(new ApiStatusResponse(registerProfileOutput.getStatus(), registerProfileOutput.getMessage())));
-
-                }
-
-                else if (registerProfileOutput.getStatus() == ConstantData.STATUS_CODE_TOKEN_MISMATCH) {
-
-                    // clear table
-
-                    teacherRoomDatabase.clearAllTables();
-
-                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(registerProfileOutput.getStatus(), registerProfileOutput.getMessage())));
-
-                }
-
-                else {
-
-                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(registerProfileOutput.getStatus(), registerProfileOutput.getMessage())));
-                }
+//                if (response.body() == null) {
+//                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(response.code(), response.message())));
+//                }
+//
+//                RegisterProfileOutput registerProfileOutput = response.body();
+//
+//                if (registerProfileOutput.getStatus() == ConstantData.STATUS_CODE_SUCESS) {
+//
+//                    // add to db
+//
+//                    teacherRoomDatabase.teacherDao().insert(teacher);
+//
+//                    apiStatusResponse.postValue(Resource.success(new ApiStatusResponse(registerProfileOutput.getStatus(), registerProfileOutput.getMessage())));
+//
+//                }
+//
+//                else if (registerProfileOutput.getStatus() == ConstantData.STATUS_CODE_TOKEN_MISMATCH) {
+//
+//                    // clear table
+//
+//                    teacherRoomDatabase.clearAllTables();
+//
+//                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(registerProfileOutput.getStatus(), registerProfileOutput.getMessage())));
+//
+//                }
+//
+//                else {
+//
+//                    apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(registerProfileOutput.getStatus(), registerProfileOutput.getMessage())));
+//                }
             }
 
             @Override
             public void onFailure(Call<RegisterProfileOutput> call, Throwable t) {
 
-                apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(-1, t.getMessage())));
+//                apiStatusResponse.postValue(Resource.error("", new ApiStatusResponse(-1, t.getMessage())));
 
             }
         });

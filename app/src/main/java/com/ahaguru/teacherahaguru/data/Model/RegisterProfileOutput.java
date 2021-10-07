@@ -1,21 +1,21 @@
 package com.ahaguru.teacherahaguru.data.Model;
 
 public class RegisterProfileOutput {
-    private Integer status;
+    private int status;
     private String message;
     private DataOutput data;
 
-    public RegisterProfileOutput(Integer status, String message, DataOutput data) {
+    public RegisterProfileOutput(int status, String message, DataOutput data) {
         this.status = status;
         this.message = message;
         this.data = data;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

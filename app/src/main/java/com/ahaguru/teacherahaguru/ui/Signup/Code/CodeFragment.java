@@ -56,7 +56,7 @@ public class CodeFragment extends Fragment {
             @Override
             public void onChanged(Resource<ApiStatusResponse> apiStatusResponseResource) {
 
-                handleRegisterProfileApiResponse(apiStatusResponseResource);
+//                handleRegisterProfileApiResponse(apiStatusResponseResource);
 
             }
         });
@@ -146,14 +146,16 @@ public class CodeFragment extends Fragment {
 
             else {
 
-//                Teachers teachers = new Teachers(name, phone, email, contactEmail, ConstantData.REQUESTED);
-//                codeViewModel.insert(teachers);
+                Teachers teachers = new Teachers(name, phone, email, contactEmail, ConstantData.REQUESTED);
+                codeViewModel.insert(teachers);
 
-                TeacherInput teacherInput = new TeacherInput(name, phone, email, subject, contactEmail,ConstantData.REQUESTED);
+                navController.navigate(R.id.action_codeFragment_to_waitingFragment);
 
-                RegisterProfileInput registerProfileInput = new RegisterProfileInput(ConstantData.PROFILE_TYPE_TEACHER, "YIOPS", teacherInput  );
+//                TeacherInput teacherInput = new TeacherInput(name, phone, email, subject, contactEmail,ConstantData.REQUESTED);
+//
+//                RegisterProfileInput registerProfileInput = new RegisterProfileInput(ConstantData.PROFILE_TYPE_TEACHER, "YIOPS", teacherInput  );
 
-                codeViewModel.setRegisterProfileInput(registerProfileInput);
+//                codeViewModel.setRegisterProfileInput(registerProfileInput);
             }
 
         });
